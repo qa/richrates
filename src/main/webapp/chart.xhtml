@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j" xmlns:jsflot="http://www.jsflot.org/taglib/jsflot">
+
+    <body>
+        <ui:composition template="/templates/template.xhtml">
+
+            <ui:define name="title">RichRates - Chart</ui:define>
+
+            <ui:define name="head">
+                <jsflot:resources />
+                <h:outputScript library="scripts" name="richrates.js"/>
+                <h:outputStylesheet library="styles" name="chart.css"/>
+            </ui:define>
+
+            <ui:define name="main">
+
+                <rich:dragIndicator id="indicator" />
+
+                <div style="float: left; width: 650px;"><h:form id="dateForm" style="margin-bottom: 20px">
+                        <rich:messages/>
+                        <rich:graphValidator value="#{chartBean}">
+                            <h:panelGrid columns="3" styleClass="datesForm">
+                                <h:outputLabel value="From date" for="fromDate" style="white-space: nowrap;" />
+                                <rich:calendar id="fromDate" value="#{chartBean.fromDate}" required="true" styleClass="calendar"
+                                               boundaryDatesMode="select" dayDisableFunction="disablementFunction" defaultLabel="Select a date"
+                                               dayClassFunction="disabledClassesProv" validator="#{ratesBean.validateDate}"
+                                               style="white-space: nowrap;" timeZone="#{ratesBean.timeZone}"/>
+
+                                <rich:message id="fromDateMsg" for="fromDate" showDetail="false" showSummary="false"/>
+
+                                <h:outputLabel value="To date" for="toDate" style="white-space: nowrap;" />
+                                <rich:calendar id="toDate" value="#{chartBean.toDate}" required="true" styleClass="calendar"
+                                               boundaryDatesMode="select" dayDisableFunction="disablementFunction" defaultLabel="Select a date"
+                                               dayClassFunction="disabledClassesProv" validator="#{ratesBean.validateDate}"
+                                               style="white-space: nowrap;" timeZone="#{ratesBean.timeZone}" />
+
+                                <rich:message id="toDateMsg" for="toDate" showDetail="false" showSummary="false"/>
+
+                                <!--                                <rich:spacer id="spacer" height="30px" />-->
+                                <a4j:commandButton id="displayButton" value="Display" action="#{chartBean.display}" render="chart" />
+                            </h:panelGrid>
+                        </rich:graphValidator>
+
+                    </h:form> <h:form id="chartForm">
+                        <a4j:outputPanel id="chartPanel" layout="block" ajaxRendered="true">
+                            <rich:dropTarget id="dropArea" acceptedTypes="flag" dropListener="#{chartBean.processDrop}" />
+
+                            <jsflot:flotChart id="chart" value="#{chartBean.currencyData}" showLines="true" showDataPoints="true"
+                                              height="350" width="700" mode="Time" timeFormat="%b %d" chartType="line" showXaxisLabels="true"
+                                              showYaxisLabels="true" yaxisMinValue="#{chartBean.yaxisMinValue}"
+                                              yaxisMaxValue="#{chartBean.yaxisMaxValue}" />
+                        </a4j:outputPanel>
+                    </h:form></div>
+
+                <div class="flags">
+                    <h:form id="flagsForm" prependId="false">
+                        <rich:dataGrid value="#{ratesBean.codes}" id="flags" var="code" columns="3">
+                            <a4j:outputPanel layout="block" id="panel">
+                                <rich:dragSource id="dragArea" dragIndicator="indicator" type="flag" dragValue="#{code}">
+                                    <ui:remove>
+<!--                                        <rich:dndParam name="label" value="#{ratesBean.currencyNames[code]}" />-->
+                                    </ui:remove>
+                                </rich:dragSource>
+                                <h:graphicImage id="flag" library="flags" name="#{code}_64.png" alt="#{ratesBean.currencyNames[code]}"
+                                                title="#{ratesBean.currencyNames[code]}" onmouseover="this.style.cursor='move'" />
+                            </a4j:outputPanel>
+                        </rich:dataGrid>
+                    </h:form>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:rich="http://richfaces.org/rich">
+
+    <h:head>
+        <title><ui:insert name="title">Default title</ui:insert></title>
+        <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+        <f:loadBundle basename="org.richfaces.examples.richrates.messages" var="msgs" />
+        <h:outputStylesheet library="styles" name="common.css"/>
+        <link rel="shortcut icon" href="#{request.contextPath}/resources/images/favicon.ico" />
+        <style type="text/css">
+            html {
+                height: 100%;
+                background: #{richSkin.additionalBackgroundColor};
+                background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #{richSkin.generalBackgroundColor}), color-stop(0.3, #{richSkin.additionalBackgroundColor}), color-stop(1, rgb(255,255,255))) no-repeat;
+                background: -moz-linear-gradient(center bottom, #{richSkin.generalBackgroundColor} 0%, #{richSkin.additionalBackgroundColor} 50%, rgb(255, 255, 255) 100%);
+                background-attachment: fixed;
+            }
+
+            .rf-ddm-itm-lbl {
+                padding-top: 5px;
+                color: inherit !important;
+            }
+
+            .rf-ddm-itm-unsel {
+                color: #{richSkin.headerTextColor};
+            }
+
+            .rf-ddm-itm-sel {
+                color: #{richSkin.generalTextColor};
+            }
+
+            .text-footer {
+                color: #{richSkin.generalTextColor};
+            }
+
+            .text-footer a {
+                font-size: medium;
+                font-family: verdana;
+            }
+
+            .rf-msg-sum {
+                color: #{richSkin.generalTextColor};
+            }
+        </style>
+        <ui:insert name="head" />
+    </h:head>
+
+    <h:body>
+        <div id="wrap">
+
+            <div id="header"><ui:insert name="header">
+                    <h:panelGroup>
+                        <table width="100%">
+                            <tbody>
+                                <tr>
+                                    <td class="app-title">
+                                        <a id="headerLink" href="#{facesContext.externalContext.requestContextPath}">
+                                            <span>RichRates</span>
+                                        </a>
+                                    </td>
+                                    <td align="right" class="skin-chooser">
+                                        <h:form id="skin">
+                                            <h:selectOneMenu id="select" value="#{skinBean.skin}" onchange="submit()">
+                                                <f:selectItem itemLabel="Emerald Town" itemValue="emeraldTown" />
+                                                <f:selectItem itemLabel="Blue Sky" itemValue="blueSky" />
+                                                <f:selectItem itemLabel="Ruby" itemValue="ruby" />
+                                                <f:selectItem itemLabel="Wine" itemValue="wine" />
+                                                <f:selectItem itemLabel="Japan Cherry" itemValue="japanCherry" />
+                                                <f:selectItem itemLabel="Classic" itemValue="classic" />
+                                                <f:selectItem itemLabel="Deep Marine" itemValue="deepMarine" />
+                                                <f:selectItem itemLabel="Plain" itemValue="plain" />
+                                            </h:selectOneMenu>
+                                        </h:form>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <h:form id="menuForm">
+                                            <rich:toolbar id="menuBar" itemSeparator="disc">
+                                                <rich:menuItem id="index" action="index?faces-redirect=true" label="Calculator" />
+                                                <rich:menuItem id="table" action="table?faces-redirect=true" label="Exchange Rates" />
+                                                <rich:menuItem id="chart" action="chart?faces-redirect=true" label="Chart" />
+                                            </rich:toolbar>
+                                        </h:form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </h:panelGroup>
+
+                </ui:insert></div>
+
+            <div id="main">
+                <ui:insert name="main">Default main text</ui:insert>
+            </div>
+        </div>
+
+        <div id="footer">
+            <ui:insert name="footer">
+                <hr/>
+                <div class="text-footer">
+                    Powered by <a href="http://jboss.org/richfaces">RichFaces 4</a>.
+                    Data provided by <a href="http://www.ecb.int">European Central Bank</a>.
+                    Flags by <a href="http://flags.redpixart.com/">RedpixArt</a>.
+                </div>
+            </ui:insert>
+        </div>
+
+    </h:body>
+
+
+</html>
+

@@ -1,0 +1,102 @@
+* {
+    margin: 0;
+}
+
+#wrap {
+    width: 950px;
+    margin: auto;
+    height: auto;
+    min-height: 100%;
+    padding-bottom: 3em;
+}
+
+#header {
+    margin-bottom: 10px;
+}
+
+#main {
+    padding: 10px;
+}
+
+#footer {
+    clear: both;
+    width: 950px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 1em;
+    height: 3em;
+    z-index: 10;
+
+}
+
+td.skin-chooser {
+    vertical-align: top;
+    padding-top: 5px;
+    padding-right: 10px;
+}
+
+td.skin-chooser select {
+    width: 120px;
+}
+
+.app-title {
+    padding-left: 10px;
+    padding-top: 20px;
+    text-shadow: gray 2px -2px 1px;
+}
+
+.app-title a {
+    font-size: 50px;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:active {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.text-footer {
+    text-align: center;
+    padding-top: 10px;
+}
+
+.calendar {
+    width: 235px;
+}
+
+.disabled-day {
+    color: gray !important;
+}
+
+div.flags {
+    float: right;
+}
+
+div.flags table {
+    border: none;
+}
+
+div.flags td {
+    border: none;
+    width: 54px;
+}
+
+div.flags input {
+    width: 48px;
+    z-index: 1;
+}
+
+.rf-dt {
+    background-color: transparent;
+}

@@ -1,0 +1,7 @@
+.datesForm td:nth-child(2) {
+	white-space: nowrap;
+}
+
+.rf-dg {
+    background-color: transparent !important;
+}

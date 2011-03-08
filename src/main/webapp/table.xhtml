@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:rich="http://richfaces.org/rich" xmlns:a4j="http://richfaces.org/a4j">
+
+    <body>
+        <ui:composition template="/templates/template.xhtml">
+
+            <ui:define name="title">RichRates - Exchange Rates</ui:define>
+
+            <ui:define name="head">
+                <h:outputScript library="scripts" name="richrates.js"/>
+                <h:outputStylesheet library="styles" name="table.css"/>
+            </ui:define>
+            <ui:define name="main">
+                <h2>Daily Exchange Rates</h2>
+                <p>These reference exchange rates are being published by European Central Bank, usually at 14:15 CET on days
+                    when the payment system TARGET is open.</p>
+                <br />
+                <rich:messages id="messages"/>
+                <h:form id="dateForm">
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="Date:" for="date" />
+                        <rich:calendar id="date" value="#{tableBean.selectedDate}" required="true" styleClass="calendar"
+                                       boundaryDatesMode="select" dayDisableFunction="disablementFunction" dayClassFunction="disabledClassesProv"
+                                       validator="#{ratesBean.validateDate}" defaultLabel="Select a date" timeZone="#{ratesBean.timeZone}">
+                            <a4j:ajax render="tableForm" />
+                        </rich:calendar>
+                    </h:panelGrid>
+                </h:form>
+
+                <h:form id="tableForm" style="padding-top: 20px;">
+                    <h:outputText value="#{tableBean.selectedDate}" style="font-weight: bold;">
+                        <f:convertDateTime dateStyle="full" timeStyle="none" timeZone="#{ratesBean.timeZone}" />
+                    </h:outputText>
+
+                    <rich:dataTable id="table" value="#{ratesBean.codes}" var="code" style="margin-top: 10px; width: 350px;" rows="12">
+                        <rich:column id="currency" sortBy="#{code}" sortOrder="ascending">
+                            <f:facet name="header">Currency Code</f:facet>
+                            <h:graphicImage id="flag" library="flags" name="#{code}_64.png" alt="#{ratesBean.currencyNames[code]}"
+                                            title="#{ratesBean.currencyNames[code]}" height="24px"
+                                            style="padding-right: 10px; vertical-align: middle;" />
+                            <h:outputText value="#{code}" />
+                            <f:facet name="footer">Currency Code</f:facet>
+                        </rich:column>
+
+                        <rich:column id="name" sortBy="#{ratesBean.currencyNames[code]}">
+                            <f:facet name="header">Currency Name</f:facet>
+                            <h:outputText value="#{ratesBean.currencyNames[code]}" />
+                            <f:facet name="footer">Currency Name</f:facet>
+                        </rich:column>
+
+                        <rich:column id="rate" sortBy="#{ratesBean.currencies[tableBean.selectedDate][code]}">
+                            <f:facet name="header">Exchange Rate</f:facet>
+                            <h:outputText value="#{ratesBean.currencies[tableBean.selectedDate][code]}" />
+                            <f:facet name="footer">Exchange Rate</f:facet>
+                        </rich:column>
+
+                        <f:facet name="footer">
+                            <rich:dataScroller for="table" maxPages="10" fastControls="hide" boundaryControls="hide" id="dataScroller">
+                                <f:facet name="previous">
+                                    <h:outputText value=" Previous " />
+                                </f:facet>
+                                <f:facet name="previous_disabled">
+                                    <h:outputText value=" Previous " />
+                                </f:facet>
+                                <f:facet name="next">
+                                    <h:outputText value=" Next " />
+                                </f:facet>
+                                <f:facet name="next_disabled">
+                                    <h:outputText value=" Next " />
+                                </f:facet>
+                            </rich:dataScroller>
+                        </f:facet>
+                    </rich:dataTable>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
