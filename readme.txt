@@ -2,7 +2,7 @@ RichRates
 
 = Introduction
 
-RichRates is a sample LGPL-licenced RichFaces application that demonstrates usage of RichFaces 3.3.3 with JSF2 
+RichRates is a sample LGPL-licenced RichFaces application that demonstrates usage of RichFaces 4 with JSF2 
 and Facelets. The application consists of three pages. The first page contains a calculator with which it 
 is possible to convert Euros to about 30 foreign currencies and vice versa. The second page contains a table 
 with all available exchange rates for selected day. The last page displays a chart for one selected currency. 
@@ -17,7 +17,7 @@ RichFaces 3.3.3.
 = Requirements
 Apache Maven 2.2.1
 OpenJDK or Sun JDK 6
-JBoss AS 5.1.0.GA or Tomcat 6.0.20
+JBoss AS 6 or newer
 
 = Structure 
 
