@@ -10,29 +10,19 @@ It is possible to select time range for which this chart will be displayed. All 
 Central Bank. Since it is a demo application, there are only data for last 90 days, excluding weekends and 
 state holidays.
 
-The application demonstrates lot of new JSF features, such as bean annotations, uses new scopes and implicit
-navigation. Unfortunately, it is not possible to use View Declaration Language and JSF2's Ajax tags with
-RichFaces 3.3.3.
+The application demonstrates lot of new JSF features, such as bean annotations, new scopes, implicit
+navigation, View Declaration Language and JSF2's Ajax tag.
 
 = Requirements
-Apache Maven 2.2.1
+Apache Maven 2.2.1 or newer
 OpenJDK or Sun JDK 6
-JBoss AS 6 or newer
-
-= Structure 
-
-The project consists of two modules -- source (containing the application) and tests (containing Selenium tests).
+JBoss AS 6 or JBoss AS 7
 
 = Build and deploy
 
-To build a project run the following either from project root or from the directory "source":
-  mvn clean install -Prelease
-This will create several WAR archives in source/target. There are WAR archives for Tomcat and JEE application
-server. If you decide to run RichRates from an application server, you need to provide JSF2 libraries.
-
-= Running tests
-
-For running tests, see the README file in the folder "tests".
+To build a project run the following either from project root:
+  mvn clean install 
+This will create a WAR archive in directory "target". This WAR is deployable to JBoss AS 6 and JBoss AS 7.
 
 = Credits
 
