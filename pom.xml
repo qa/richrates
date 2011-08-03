@@ -165,14 +165,6 @@
 			<version>4.1.0.Final</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.jsflot</groupId>
-			<artifactId>jsflot</artifactId>
-			<version>0.7.0</version>
-			<type>jar</type>
-			<scope>system</scope>
-			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/jsflot-0.7.0.jar</systemPath>
-		</dependency>
 	</dependencies>
 
 	<build>
