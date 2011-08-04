@@ -21,12 +21,6 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>org.richfaces.examples</groupId>
-		<artifactId>richfaces-example-parent</artifactId>
-		<version>4.1.0-SNAPSHOT</version>
-	</parent>
-
 	<groupId>org.richfaces.examples</groupId>
 	<artifactId>richrates</artifactId>
 	<name>RichRates</name>
@@ -76,28 +70,6 @@
 
 	<repositories>
 		<repository>
-			<id>jboss-qa-releases-repository</id>
-			<url>http://nexus.qa.jboss.com:8081/nexus/content/repositories/releases</url>
-			<releases>
-				<updatePolicy>never</updatePolicy>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>jboss-qa-snapshots-repository</id>
-			<url>http://nexus.qa.jboss.com:8081/nexus/content/repositories/snapshots</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<updatePolicy>daily</updatePolicy>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-		<repository>
 			<id>jboss-public-repository-group</id>
 			<name>JBoss Public Maven Repository Group</name>
 			<url>https://repository.jboss.org/nexus/content/groups/public</url>
@@ -132,6 +104,10 @@
 		<dependency>
 			<groupId>org.richfaces.ui</groupId>
 			<artifactId>richfaces-components-ui</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.richfaces.core</groupId>
+			<artifactId>richfaces-core-impl</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>javax.validation</groupId>
