@@ -29,17 +29,11 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Past;
 
 import org.joda.time.DateTime;
-import org.jsflot.xydata.XYDataList;
-import org.jsflot.xydata.XYDataPoint;
-import org.jsflot.xydata.XYDataSetCollection;
 import org.richfaces.event.DropEvent;
-import org.richfaces.skin.Skin;
-import org.richfaces.skin.SkinFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -65,9 +59,6 @@ public class ChartBean implements Serializable {
     private Map<String, String> currencyNames;
     private String selectedCurrency;
     private String draggedCurrency;
-    private XYDataList list;
-    private double min = Double.MAX_VALUE;
-    private double max = Double.MIN_VALUE;
     private Logger logger;
 
     /**
@@ -192,19 +183,8 @@ public class ChartBean implements Serializable {
      * 
      * @return set of points for chart
      */
-    public XYDataSetCollection getCurrencyData() {
-        Skin skin = SkinFactory.getInstance().getSkin(FacesContext.getCurrentInstance());
-        XYDataSetCollection data = new XYDataSetCollection();
-
-        if (list != null) {
-            list.setColor((String) skin.getParameter(FacesContext.getCurrentInstance(), "generalLinkColor"));
-            data.addDataList(list);
-            return data;
-        }
-
-        list = new XYDataList();
-        list.setColor((String) skin.getParameter(FacesContext.getCurrentInstance(), "generalLinkColor"));
-        list.setLabel(currencyNames.get(selectedCurrency));
+    public String getCurrencyData() {
+        StringBuilder data = new StringBuilder("[ ");
 
         DateTime toDate = new DateTime(this.toDate);
         DateTime actualDate = new DateTime(fromDate);
@@ -216,58 +196,16 @@ public class ChartBean implements Serializable {
             }
             Number x = actualDate.getMillis();
             Number y = currencies.get(actualDate.toDate()).get(selectedCurrency).doubleValue();
-            list.addDataPoint(x, y);
+            data.append("[");
+            data.append(x);
+            data.append(",");
+            data.append(y);
+            data.append("],");
             actualDate = actualDate.plusDays(1);
         }
 
-        data.addDataList(list);
-        return data;
-    }
-
-    /**
-     * Returns the maximal value on the Y axis so that the chart looks better.
-     * 
-     * @return maximal value on the Y axis
-     */
-    public double getYaxisMaxValue() {
-        for (XYDataPoint xy : list.getDataPointList()) {
-            if (xy.getY().doubleValue() < min) {
-                min = xy.getY().doubleValue();
-            }
-            if (xy.getY().doubleValue() > max) {
-                max = xy.getY().doubleValue();
-            }
-        }
-
-        return max * 1.02;
-    }
-
-    /**
-     * Returns the minimal value on the Y axis so that the chart looks better.
-     * 
-     * @return minimal value on the Y axis
-     */
-    public double getYaxisMinValue() {
-        for (XYDataPoint xy : list.getDataPointList()) {
-            if (xy.getY().doubleValue() < min) {
-                min = xy.getY().doubleValue();
-            }
-            if (xy.getY().doubleValue() > max) {
-                max = xy.getY().doubleValue();
-            }
-        }
-
-        return min * 0.98;
-    }
-
-    /**
-     * An action for displaying a new chart.
-     */
-    public void display() {
-        logger.debug("Displaying a new chart");
-        list = null;
-        min = Double.MAX_VALUE;
-        max = Double.MIN_VALUE;
+        data.append("]");
+        return data.toString();
     }
 
     /**
@@ -278,7 +216,6 @@ public class ChartBean implements Serializable {
      */
     public void processDrop(DropEvent event) {
         selectedCurrency = (String) event.getDragValue();
-        display();
     }
 
     @AssertTrue(message = "Dates are in wrong order.")

@@ -1,75 +1,138 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" 
-      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:rich="http://richfaces.org/rich"
-      xmlns:a4j="http://richfaces.org/a4j" xmlns:jsflot="http://www.jsflot.org/taglib/jsflot">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:rich="http://richfaces.org/rich" xmlns:a4j="http://richfaces.org/a4j">
 
-    <body>
-        <ui:composition template="/templates/template.xhtml">
+<body>
+    <ui:composition template="/templates/template.xhtml">
 
-            <ui:define name="title">RichRates - Chart</ui:define>
+        <ui:define name="title">RichRates - Chart</ui:define>
 
-            <ui:define name="head">
-                <jsflot:resources />
-                <h:outputScript library="scripts" name="richrates.js"/>
-                <h:outputStylesheet library="styles" name="chart.css"/>
-            </ui:define>
+        <ui:define name="head">
+            <h:outputScript library="scripts" name="richrates.js" />
+            <h:outputScript library="scripts/flot" name="jquery.flot.min.js" />
+            <h:outputScript library="scripts/flot" name="jquery.flot.crosshair.min.js" />
+            <h:outputScript library="scripts/flot" name="jquery.flot.fillbetween.min.js" />
+            <h:outputScript library="scripts/flot" name="jquery.flot.image.min.js" />
+            <h:outputScript library="scripts/flot" name="jquery.flot.navigate.min.js" />
+            <h:outputScript library="scripts/flot" name="jquery.flot.pie.min.js" />
+            <h:outputScript library="scripts/flot" name="jquery.flot.resize.min.js" />
+            <h:outputScript library="scripts/flot" name="jquery.flot.selection.min.js" />
+            <h:outputScript library="scripts/flot" name="jquery.flot.stack.min.js" />
+            <h:outputScript library="scripts/flot" name="jquery.flot.symbol.min.js" />
+            <h:outputScript library="scripts/flot" name="jquery.flot.threshold.min.js" />
+            <h:outputScript library="scripts/flot" name="jquery.colorhelpers.min.js" />
+            <!-- [if lte IE 8]><h:outputScript library="scripts/flot" name="excanvas.min.js"/><![endif]-->
+            <h:outputStylesheet library="styles" name="chart.css" />
+        </ui:define>
 
-            <ui:define name="main">
+        <ui:define name="main">
 
-                <rich:dragIndicator id="indicator" />
+            <rich:dragIndicator id="indicator" />
 
-                <div style="float: left; width: 650px;"><h:form id="dateForm" style="margin-bottom: 20px">
-                        <rich:messages/>
-                        <rich:graphValidator value="#{chartBean}">
-                            <h:panelGrid columns="3" styleClass="datesForm">
-                                <h:outputLabel value="From date" for="fromDate" style="white-space: nowrap;" />
-                                <rich:calendar id="fromDate" value="#{chartBean.fromDate}" required="true" styleClass="calendar"
-                                               boundaryDatesMode="select" dayDisableFunction="disablementFunction" defaultLabel="Select a date"
-                                               dayClassFunction="disabledClassesProv" validator="#{ratesBean.validateDate}"
-                                               style="white-space: nowrap;" timeZone="#{ratesBean.timeZone}"/>
+            <div style="float: left; width: 650px;">
+                <h:form id="dateForm" style="margin-bottom: 20px">
+                    <rich:messages />
+                    <rich:graphValidator value="#{chartBean}">
+                        <h:panelGrid columns="3" styleClass="datesForm">
+                            <h:outputLabel value="From date" for="fromDate" style="white-space: nowrap;" />
+                            <rich:calendar id="fromDate" value="#{chartBean.fromDate}" required="true" styleClass="calendar"
+                                boundaryDatesMode="select" dayDisableFunction="disablementFunction" defaultLabel="Select a date"
+                                dayClassFunction="disabledClassesProv" validator="#{ratesBean.validateDate}"
+                                style="white-space: nowrap;" timeZone="#{ratesBean.timeZone}" />
 
-                                <rich:message id="fromDateMsg" for="fromDate" showDetail="false" showSummary="false"/>
+                            <rich:message id="fromDateMsg" for="fromDate" showDetail="false" showSummary="false" />
 
-                                <h:outputLabel value="To date" for="toDate" style="white-space: nowrap;" />
-                                <rich:calendar id="toDate" value="#{chartBean.toDate}" required="true" styleClass="calendar"
-                                               boundaryDatesMode="select" dayDisableFunction="disablementFunction" defaultLabel="Select a date"
-                                               dayClassFunction="disabledClassesProv" validator="#{ratesBean.validateDate}"
-                                               style="white-space: nowrap;" timeZone="#{ratesBean.timeZone}" />
+                            <h:outputLabel value="To date" for="toDate" style="white-space: nowrap;" />
+                            <rich:calendar id="toDate" value="#{chartBean.toDate}" required="true" styleClass="calendar"
+                                boundaryDatesMode="select" dayDisableFunction="disablementFunction" defaultLabel="Select a date"
+                                dayClassFunction="disabledClassesProv" validator="#{ratesBean.validateDate}"
+                                style="white-space: nowrap;" timeZone="#{ratesBean.timeZone}" />
 
-                                <rich:message id="toDateMsg" for="toDate" showDetail="false" showSummary="false"/>
+                            <rich:message id="toDateMsg" for="toDate" showDetail="false" showSummary="false" />
 
-                                <!--                                <rich:spacer id="spacer" height="30px" />-->
-                                <a4j:commandButton id="displayButton" value="Display" action="#{chartBean.display}" render="chart" />
-                            </h:panelGrid>
-                        </rich:graphValidator>
+                            <a4j:commandButton id="displayButton" value="Display" render="chart" />
+                        </h:panelGrid>
+                    </rich:graphValidator>
 
-                    </h:form> <h:form id="chartForm">
-                        <a4j:outputPanel id="chartPanel" layout="block" ajaxRendered="true">
-                            <rich:dropTarget id="dropArea" acceptedTypes="flag" dropListener="#{chartBean.processDrop}" />
+                </h:form>
+                <h:form id="chartForm">
+                    <a4j:outputPanel id="chartPanel" styleClass="chart-panel" layout="block" ajaxRendered="true"
+                        style="width: 700px; height: 350px;">
+                        <rich:dropTarget id="dropArea" acceptedTypes="flag" dropListener="#{chartBean.processDrop}" />
+                        <script type="text/javascript">
+							var plot = jQuery.plot(jQuery("div.chart-panel"),
+							        [{data : #{chartBean.currencyData}, color : '#{richSkin.generalLinkColor}', 
+										label : '#{chartBean.selectedCurrency}' }],							
+															 
+						            {
+										yaxis : { autoscaleMargin : 0.02 }, 
+								        grid : { 
+								        	hoverable : true, 
+								        	clickable : true 
+								        	},
+										xaxis : { 
+											mode : "time" 
+											}, 
+										points : { 
+											show : true 
+											}, 
+										lines : { 
+											show : true 
+											}  
+									});
+									
+							function showTooltip(x, y, contents) {
+			                    $('<div id="tooltip">' + contents + '</div>').css( {
+			                        position: 'absolute',
+			                        display: 'none',
+			                        top: y + 5,
+			                        left: x + 5,
+			                        border: '1px solid #fdd',
+			                        padding: '2px',
+			                        'background-color': '#fee',
+			                        opacity: 0.80
+			                    }).appendTo('body').fadeIn(200);
+			                }
+							
+							var previousPoint = null;
+							
+							$('div.chart-panel').bind('plothover', function (event, pos, item) {
+                                if (item) {
+                                    if (previousPoint != item.dataIndex) {
+                                        previousPoint = item.dataIndex;
+                                        $('#tooltip').remove();
+                                        var x = item.datapoint[0].toFixed(2),
+                                        y = item.datapoint[1].toFixed(2);
+                                        showTooltip(item.pageX, item.pageY, '1 EUR = ' + y + ' #{chartBean.selectedCurrency}');
+                                    }
+                                }
+                                else {
+                                    $('#tooltip').remove();
+                                    previousPoint = null;            
+                                }
+                            });
+         				</script>
+                    </a4j:outputPanel>
+                </h:form>
+            </div>
 
-                            <jsflot:flotChart id="chart" value="#{chartBean.currencyData}" showLines="true" showDataPoints="true"
-                                              height="350" width="700" mode="Time" timeFormat="%b %d" chartType="line" showXaxisLabels="true"
-                                              showYaxisLabels="true" yaxisMinValue="#{chartBean.yaxisMinValue}"
-                                              yaxisMaxValue="#{chartBean.yaxisMaxValue}" />
+            <div class="flags">
+                <h:form id="flagsForm" prependId="false">
+                    <rich:dataGrid value="#{ratesBean.codes}" id="flags" var="code" columns="3">
+                        <a4j:outputPanel layout="block" id="panel">
+                            <rich:dragSource id="dragArea" dragIndicator="indicator" type="flag" dragValue="#{code}">
+                                <ui:remove>
+                                    <!--                                        <rich:dndParam name="label" value="#{ratesBean.currencyNames[code]}" />-->
+                                </ui:remove>
+                            </rich:dragSource>
+                            <h:graphicImage id="flag" library="flags" name="#{code}_64.png"
+                                alt="#{ratesBean.currencyNames[code]}" title="#{ratesBean.currencyNames[code]}"
+                                onmouseover="this.style.cursor='move'" />
                         </a4j:outputPanel>
-                    </h:form></div>
-
-                <div class="flags">
-                    <h:form id="flagsForm" prependId="false">
-                        <rich:dataGrid value="#{ratesBean.codes}" id="flags" var="code" columns="3">
-                            <a4j:outputPanel layout="block" id="panel">
-                                <rich:dragSource id="dragArea" dragIndicator="indicator" type="flag" dragValue="#{code}">
-                                    <ui:remove>
-<!--                                        <rich:dndParam name="label" value="#{ratesBean.currencyNames[code]}" />-->
-                                    </ui:remove>
-                                </rich:dragSource>
-                                <h:graphicImage id="flag" library="flags" name="#{code}_64.png" alt="#{ratesBean.currencyNames[code]}"
-                                                title="#{ratesBean.currencyNames[code]}" onmouseover="this.style.cursor='move'" />
-                            </a4j:outputPanel>
-                        </rich:dataGrid>
-                    </h:form>
-                </div>
-            </ui:define>
-        </ui:composition>
-    </body>
+                    </rich:dataGrid>
+                </h:form>
+            </div>
+        </ui:define>
+    </ui:composition>
+</body>
 </html>
