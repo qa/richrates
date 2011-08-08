@@ -26,9 +26,9 @@ import java.util.Date;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  * A bean used on the page with table.
@@ -36,14 +36,14 @@ import javax.faces.bean.ViewScoped;
  * @author <a href="mailto:ppitonak@redhat.com">Pavol Pitonak</a>
  * @version $Revision$
  */
-@ManagedBean
-@ViewScoped
+@Named
+@SessionScoped
 public class TableBean implements Serializable {
 
     private static final long serialVersionUID = -1L;
-    @ManagedProperty(value = "#{ratesBean.issueDate}")
+    @Inject
+    private RatesBean ratesBean;
     private Date selectedDate;
-    @ManagedProperty(value = "#{ratesBean.currencies}")
     private Map<Date, Map<String, Double>> currencies;
 
     /**
@@ -52,6 +52,8 @@ public class TableBean implements Serializable {
     @SuppressWarnings("unused")
     @PostConstruct
     private void initialize() {
+        selectedDate = ratesBean.getIssueDate();
+        currencies = ratesBean.getCurrencies();
     }
 
     /**

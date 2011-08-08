@@ -26,9 +26,10 @@ import java.util.Date;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Past;
 
@@ -43,20 +44,19 @@ import org.slf4j.LoggerFactory;
  * @author <a href="mailto:ppitonak@redhat.com">Pavol Pitonak</a>
  * @version $Revision$
  */
-@ManagedBean
-@ViewScoped
+@Named
+@SessionScoped
 public class ChartBean implements Serializable {
 
     private static final long serialVersionUID = -1L;
+    @Inject
+    private RatesBean ratesBean;
     @ManagedProperty(value = "#{ratesBean.issueDate}")
     @Past(message = "To date: Future date cannot be selected.")
     private Date toDate;
     @Past(message = "From date: Future date cannot be selected.")
     private Date fromDate;
-    @ManagedProperty(value = "#{ratesBean.currencies}")
     private Map<Date, Map<String, Double>> currencies;
-    @ManagedProperty(value = "#{ratesBean.currencyNames}")
-    private Map<String, String> currencyNames;
     private String selectedCurrency;
     private String draggedCurrency;
     private Logger logger;
@@ -69,7 +69,9 @@ public class ChartBean implements Serializable {
     private void initialize() {
         logger = LoggerFactory.getLogger(ChartBean.class);
         selectedCurrency = "USD";
+        toDate = ratesBean.getIssueDate();
         fromDate = new DateTime(toDate).minusDays(30).toDate();
+        currencies = ratesBean.getCurrencies();
     }
 
     /**
@@ -174,7 +176,6 @@ public class ChartBean implements Serializable {
      *            map containing a mapping of currency code to its long name
      */
     public void setCurrencyNames(Map<String, String> currencyNames) {
-        this.currencyNames = currencyNames;
     }
 
     /**

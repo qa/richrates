@@ -26,9 +26,9 @@ import java.util.Date;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.validation.constraints.Min;
 
 /**
@@ -37,16 +37,16 @@ import javax.validation.constraints.Min;
  * @author <a href="mailto:ppitonak@redhat.com">Pavol Pitonak</a>
  * @version $Revision$
  */
-@ManagedBean
+@Named
 @SessionScoped
 public class CalculatorBean implements Serializable {
 
     private static final long serialVersionUID = -1L;
     private static final int FROM_EURO = 0;
     private static final int TO_EURO = 1;
-    @ManagedProperty(value = "#{ratesBean.issueDate}")
+    @Inject
+    private RatesBean ratesBean;
     private Date selectedDate;
-    @ManagedProperty(value = "#{ratesBean.currencies}")
     private Map<Date, Map<String, Double>> currencies;
     private String selectedCurrency;
     @Min(value = 0, message = "Amount: Has to be a positive number.")
@@ -63,6 +63,8 @@ public class CalculatorBean implements Serializable {
         selectedCurrency = "USD";
         direction = FROM_EURO;
         amount = 0;
+        selectedDate = ratesBean.getIssueDate();
+        currencies = ratesBean.getCurrencies();
     }
 
     /**
