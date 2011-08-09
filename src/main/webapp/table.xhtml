@@ -36,16 +36,16 @@
                     <rich:dataTable id="table" value="#{ratesBean.codes}" var="code" style="margin-top: 10px; width: 350px;" rows="12">
                         <rich:column id="currency" sortBy="#{code}" sortOrder="ascending">
                             <f:facet name="header">Currency Code</f:facet>
-                            <h:graphicImage id="flag" library="flags" name="#{code}_64.png" alt="#{ratesBean.currencyNames[code]}"
-                                            title="#{ratesBean.currencyNames[code]}" height="24px"
+                            <h:graphicImage id="flag" library="flags" name="#{code}_64.png" alt="#{ratesBean.currenciesNames[code]}"
+                                            title="#{ratesBean.currenciesNames[code]}" height="24px"
                                             style="padding-right: 10px; vertical-align: middle;" />
                             <h:outputText value="#{code}" />
                             <f:facet name="footer">Currency Code</f:facet>
                         </rich:column>
 
-                        <rich:column id="name" sortBy="#{ratesBean.currencyNames[code]}">
+                        <rich:column id="name" sortBy="#{ratesBean.currenciesNames[code]}">
                             <f:facet name="header">Currency Name</f:facet>
-                            <h:outputText value="#{ratesBean.currencyNames[code]}" />
+                            <h:outputText value="#{ratesBean.currenciesNames[code]}" />
                             <f:facet name="footer">Currency Name</f:facet>
                         </rich:column>
 

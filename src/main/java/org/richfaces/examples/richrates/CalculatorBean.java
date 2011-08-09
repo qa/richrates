@@ -31,6 +31,9 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.Min;
 
+import annotation.ExchangeRates;
+import annotation.IssueDate;
+
 /**
  * Bean for the main page. It is possible to convert from Euro to another currency or from another currency to Euro.
  * 
@@ -45,27 +48,16 @@ public class CalculatorBean implements Serializable {
     private static final int FROM_EURO = 0;
     private static final int TO_EURO = 1;
     @Inject
-    private RatesBean ratesBean;
+    @IssueDate
     private Date selectedDate;
+    @Inject
+    @ExchangeRates
     private Map<Date, Map<String, Double>> currencies;
-    private String selectedCurrency;
+    private String selectedCurrency = "USD";
     @Min(value = 0, message = "Amount: Has to be a positive number.")
-    private double amount;
+    private double amount = 0.0;
     private double result;
-    private int direction;
-
-    /**
-     * Initialization of class fields.
-     */
-    @SuppressWarnings("unused")
-    @PostConstruct
-    private void initialize() {
-        selectedCurrency = "USD";
-        direction = FROM_EURO;
-        amount = 0;
-        selectedDate = ratesBean.getIssueDate();
-        currencies = ratesBean.getCurrencies();
-    }
+    private int direction = FROM_EURO;
 
     /**
      * Returns the amount.

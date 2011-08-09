@@ -21,8 +21,8 @@
                                     <h:graphicImage id="firstCurrency"
                                                     library="flags"
                                                     name="#{calculatorBean.fromEuro ? 'EUR' : calculatorBean.selectedCurrency}_192.png"
-                                                    alt="#{calculatorBean.fromEuro ? 'Euro' : ratesBean.currencyNames[calculatorBean.selectedCurrency]}"
-                                                    title="#{calculatorBean.fromEuro ? 'Euro' : ratesBean.currencyNames[calculatorBean.selectedCurrency]}" />
+                                                    alt="#{calculatorBean.fromEuro ? 'Euro' : ratesBean.currenciesNames[calculatorBean.selectedCurrency]}"
+                                                    title="#{calculatorBean.fromEuro ? 'Euro' : ratesBean.currenciesNames[calculatorBean.selectedCurrency]}" />
 
                                     <a4j:commandButton id="swap" type="image" image="/resources/images/swap-gray.png" style="width: 32px;"
                                                        title="Swap currencies" onmouseover="this.style.cursor='pointer'" 
@@ -31,8 +31,8 @@
                                     <h:graphicImage id="secondCurrency"
                                                     library="flags"
                                                     name="#{calculatorBean.fromEuro ? calculatorBean.selectedCurrency : 'EUR'}_192.png"
-                                                    alt="#{calculatorBean.fromEuro ? ratesBean.currencyNames[calculatorBean.selectedCurrency] : 'Euro'}"
-                                                    title="#{calculatorBean.fromEuro ? ratesBean.currencyNames[calculatorBean.selectedCurrency] : 'Euro'}" />
+                                                    alt="#{calculatorBean.fromEuro ? ratesBean.currenciesNames[calculatorBean.selectedCurrency] : 'Euro'}"
+                                                    title="#{calculatorBean.fromEuro ? ratesBean.currenciesNames[calculatorBean.selectedCurrency] : 'Euro'}" />
                                 </h:panelGrid>
 
                                 <rich:messages id="validationMsgs" showDetail="false" showSummary="true"/>
@@ -75,7 +75,7 @@
                             <rich:dataGrid value="#{ratesBean.codes}" id="flags" var="code" columns="3">
 
                                 <a4j:commandButton id="flag" image="/resources/flags/#{code}_64.png" action="#{calculatorBean.selectCurrency}"
-                                                   render="calculatorPanel" title="#{ratesBean.currencyNames[code]}"
+                                                   render="calculatorPanel" title="#{ratesBean.currenciesNames[code]}"
                                                    onmouseover="this.style.cursor='pointer'">
                                     <a4j:param assignTo="#{calculatorBean.selectedCurrency}" name="currency" value="#{code}"/>
                                 </a4j:commandButton>

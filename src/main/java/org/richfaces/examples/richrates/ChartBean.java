@@ -27,7 +27,6 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.bean.ManagedProperty;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.AssertTrue;
@@ -37,6 +36,9 @@ import org.joda.time.DateTime;
 import org.richfaces.event.DropEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import annotation.ExchangeRates;
+import annotation.IssueDate;
 
 /**
  * Bean used on the page with chart. Is is possible to draw a chart for one currency for selected time range.
@@ -50,12 +52,13 @@ public class ChartBean implements Serializable {
 
     private static final long serialVersionUID = -1L;
     @Inject
-    private RatesBean ratesBean;
-    @ManagedProperty(value = "#{ratesBean.issueDate}")
+    @IssueDate
     @Past(message = "To date: Future date cannot be selected.")
     private Date toDate;
     @Past(message = "From date: Future date cannot be selected.")
     private Date fromDate;
+    @Inject
+    @ExchangeRates
     private Map<Date, Map<String, Double>> currencies;
     private String selectedCurrency;
     private String draggedCurrency;
@@ -69,9 +72,7 @@ public class ChartBean implements Serializable {
     private void initialize() {
         logger = LoggerFactory.getLogger(ChartBean.class);
         selectedCurrency = "USD";
-        toDate = ratesBean.getIssueDate();
         fromDate = new DateTime(toDate).minusDays(30).toDate();
-        currencies = ratesBean.getCurrencies();
     }
 
     /**
