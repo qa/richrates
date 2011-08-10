@@ -19,62 +19,27 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  *******************************************************************************/
-package org.richfaces.examples.richrates;
+package annotation;
 
-import java.io.Serializable;
-import java.util.Date;
-import java.util.Map;
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.PARAMETER;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
-import annotation.ExchangeRates;
-import annotation.IssueDate;
+import javax.inject.Qualifier;
 
 /**
- * A bean used on the page with table.
+ * Qualifier for the names and ISO codes of currencies.
  * 
  * @author <a href="mailto:ppitonak@redhat.com">Pavol Pitonak</a>
  * @version $Revision$
  */
-@Named
-@SessionScoped
-public class TableBean implements Serializable {
-
-    private static final long serialVersionUID = -1L;
-    @Inject
-    @IssueDate
-    private Date selectedDate;
-    @Inject
-    @ExchangeRates
-    private Map<Date, Map<String, Double>> currencies;
-
-    /**
-     * Getter for the selected date.
-     * 
-     * @return date for which a table should be displayed
-     */
-    public Date getSelectedDate() {
-        return selectedDate;
-    }
-
-    /**
-     * Setter for selected date
-     * 
-     * @param selectedDate
-     *            date for which a table should be displayed
-     */
-    public void setSelectedDate(Date selectedDate) {
-        this.selectedDate = selectedDate;
-    }
-
-    /**
-     * Getter for exchange rates.
-     * 
-     * @return map containing a mapping of dates, ISO codes of currencies and exchange rates
-     */
-    public Map<Date, Map<String, Double>> getCurrencies() {
-        return currencies;
-    }
+@Qualifier
+@Target({ TYPE, METHOD, PARAMETER, FIELD })
+@Retention(RUNTIME)
+public @interface CurrenciesNames {
 }

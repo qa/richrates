@@ -122,11 +122,11 @@
                         <a4j:outputPanel layout="block" id="panel">
                             <rich:dragSource id="dragArea" dragIndicator="indicator" type="flag" dragValue="#{code}">
                                 <ui:remove>
-                                    <!--                                        <rich:dndParam name="label" value="#{ratesBean.currencyNames[code]}" />-->
+                                    <!--                                        <rich:dndParam name="label" value="#{ratesBean.currenciesNames[code]}" />-->
                                 </ui:remove>
                             </rich:dragSource>
                             <h:graphicImage id="flag" library="flags" name="#{code}_64.png"
-                                alt="#{ratesBean.currencyNames[code]}" title="#{ratesBean.currencyNames[code]}"
+                                alt="#{ratesBean.currenciesNames[code]}" title="#{ratesBean.currenciesNames[code]}"
                                 onmouseover="this.style.cursor='move'" />
                         </a4j:outputPanel>
                     </rich:dataGrid>

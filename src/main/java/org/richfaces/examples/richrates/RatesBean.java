@@ -36,6 +36,7 @@ import java.util.TimeZone;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Produces;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -50,6 +51,10 @@ import org.jdom.input.SAXBuilder;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import annotation.CurrenciesNames;
+import annotation.ExchangeRates;
+import annotation.IssueDate;
 
 /**
  * The main bean of the application. It downloads a data file from the Internet and parses it. It contains also long
@@ -138,7 +143,8 @@ public class RatesBean implements Serializable {
             Namespace namespace = Namespace.getNamespace("http://www.ecb.int/vocabulary/2002-08-01/eurofxref");
 
             // TODO use XPath instead of the following line
-            List<Element> dateElements = (List<Element>) document.getRootElement().getChild("Cube", namespace).getChildren("Cube", namespace);
+            List<Element> dateElements = (List<Element>) document.getRootElement().getChild("Cube", namespace)
+                .getChildren("Cube", namespace);
 
             String timeAttribute = null;
             Date date = null;
@@ -183,6 +189,7 @@ public class RatesBean implements Serializable {
 
     /**
      * Getter for the time zone;
+     * 
      * @return time zone that will be used in application.
      */
     public TimeZone getTimeZone() {
@@ -194,6 +201,9 @@ public class RatesBean implements Serializable {
      * 
      * @return issue date
      */
+    @Produces
+    @Named
+    @IssueDate
     public Date getIssueDate() {
         return issueDate;
     }
@@ -203,18 +213,11 @@ public class RatesBean implements Serializable {
      * 
      * @return map containing a mapping of dates, ISO codes of currencies and exchange rates
      */
+    @Produces
+    @Named
+    @ExchangeRates
     public Map<Date, Map<String, Double>> getCurrencies() {
         return currencies;
-    }
-
-    /**
-     * Setter for exchange rates.
-     * 
-     * @param currencies
-     *            map containing a mapping of dates, ISO codes of currencies and exchange rates
-     */
-    public void setCurrencies(Map<Date, Map<String, Double>> currencies) {
-        this.currencies = currencies;
     }
 
     /**
@@ -222,7 +225,10 @@ public class RatesBean implements Serializable {
      * 
      * @return map containing a mapping of ISO code of currency and its name, e.g. EUR -> Euro.
      */
-    public Map<String, String> getCurrencyNames() {
+    @Produces
+    @Named
+    @CurrenciesNames
+    public Map<String, String> getCurrenciesNames() {
         return currencyNames;
     }
 
@@ -260,7 +266,7 @@ public class RatesBean implements Serializable {
         // check that the selected date is not in future
         if (selectedDate.compareTo(toDate) > 0) {
             FacesMessage message = new FacesMessage(
-                    "Date: There are only exchange rates for last 90 days available (excluding weekends and holidays). Select sooner date.");
+                "Date: There are only exchange rates for last 90 days available (excluding weekends and holidays). Select sooner date.");
             message.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(message);
         }
@@ -268,7 +274,7 @@ public class RatesBean implements Serializable {
         // check that the selected date is not sooner than oldest exchange rates list
         if (selectedDate.compareTo(fromDate) < 0) {
             FacesMessage message = new FacesMessage(
-                    "Date: There are only exchange rates for last 90 days available (excluding weekends and holidays). Select later date.");
+                "Date: There are only exchange rates for last 90 days available (excluding weekends and holidays). Select later date.");
             message.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(message);
         }
@@ -276,7 +282,7 @@ public class RatesBean implements Serializable {
         // handle special cases --
         if (!currencies.keySet().contains(selectedDate.toDate())) {
             FacesMessage message = new FacesMessage(
-                    "Date: There are no exchange rates for selected day available. Select later date.");
+                "Date: There are no exchange rates for selected day available. Select later date.");
             message.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(message);
         }
