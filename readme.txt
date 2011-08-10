@@ -14,7 +14,7 @@ The application demonstrates lot of new JSF features, such as bean annotations, 
 navigation, View Declaration Language and JSF2's Ajax tag.
 
 = Requirements
-Apache Maven 2.2.1 or newer
+Apache Maven 3.0.0 or newer
 OpenJDK or Sun JDK 6
 JBoss AS 6 or JBoss AS 7
 
