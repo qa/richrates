@@ -23,13 +23,11 @@ package org.richfaces.examples.richrates;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Map;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import annotation.ExchangeRates;
 import annotation.IssueDate;
 
 /**
