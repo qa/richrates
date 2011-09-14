@@ -49,9 +49,9 @@
                             <f:facet name="footer">Currency Name</f:facet>
                         </rich:column>
 
-                        <rich:column id="rate" sortBy="#{ratesBean.exchangeRates[tableBean.selectedDate][code]}">
+                        <rich:column id="rate" sortBy="#{exchangeRates[tableBean.selectedDate][code]}">
                             <f:facet name="header">Exchange Rate</f:facet>
-                            <h:outputText value="#{ratesBean.exchangeRates[tableBean.selectedDate][code]}" />
+                            <h:outputText value="#{exchangeRates[tableBean.selectedDate][code]}" />
                             <f:facet name="footer">Exchange Rate</f:facet>
                         </rich:column>
 
