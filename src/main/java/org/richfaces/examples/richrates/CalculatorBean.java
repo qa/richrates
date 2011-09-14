@@ -135,17 +135,6 @@ public class CalculatorBean implements Serializable {
     }
 
     /**
-     * Sets the map containing all data needed for calculations. Key is a date and value is a map whose key is a string
-     * containing ISO code of currency and value is a double number expressing the exchange rate.
-     * 
-     * @param currencies
-     *            a map containing all exchange rates for all available dates
-     */
-    public void setCurrencies(Map<Date, Map<String, Double>> currencies) {
-        this.currencies = currencies;
-    }
-
-    /**
      * Calculates the result for selected amount, date and currency. It depends on whether it converts from or to Euro.
      */
     public void calculate() {

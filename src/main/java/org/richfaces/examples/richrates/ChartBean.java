@@ -133,25 +133,6 @@ public class ChartBean implements Serializable {
     }
 
     /**
-     * Getter for exchange rates.
-     * 
-     * @return map containing the mapping of dates, currency codes and exchange rates
-     */
-    public Map<Date, Map<String, Double>> getCurrencies() {
-        return currencies;
-    }
-
-    /**
-     * Setter for exchange rates.
-     * 
-     * @param currencies
-     *            map containing the mapping of dates, currency codes and exchange rates
-     */
-    public void setCurrencies(Map<Date, Map<String, Double>> currencies) {
-        this.currencies = currencies;
-    }
-
-    /**
      * Getter for dragged currency.
      * 
      * @return ISO code of the currency which was dragged

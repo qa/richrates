@@ -46,10 +46,7 @@ public class TableBean implements Serializable {
     @Inject
     @IssueDate
     private Date selectedDate;
-    @Inject
-    @ExchangeRates
-    private Map<Date, Map<String, Double>> currencies;
-
+    
     /**
      * Getter for the selected date.
      * 
@@ -67,14 +64,5 @@ public class TableBean implements Serializable {
      */
     public void setSelectedDate(Date selectedDate) {
         this.selectedDate = selectedDate;
-    }
-
-    /**
-     * Getter for exchange rates.
-     * 
-     * @return map containing a mapping of dates, ISO codes of currencies and exchange rates
-     */
-    public Map<Date, Map<String, Double>> getCurrencies() {
-        return currencies;
     }
 }

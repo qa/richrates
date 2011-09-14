@@ -216,7 +216,7 @@ public class RatesBean implements Serializable {
     @Produces
     @Named
     @ExchangeRates
-    public Map<Date, Map<String, Double>> getCurrencies() {
+    public Map<Date, Map<String, Double>> getExchangeRates() {
         return currencies;
     }
 
