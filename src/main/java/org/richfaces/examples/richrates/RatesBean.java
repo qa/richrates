@@ -94,7 +94,6 @@ public class RatesBean implements Serializable {
         currencyNames.put("CNY", "Chinese Yuan Renminbi");
         currencyNames.put("CZK", "Czech Koruna");
         currencyNames.put("DKK", "Danish Krone");
-        currencyNames.put("EEK", "Estonian Kroon");
         currencyNames.put("GBP", "British Pound");
         currencyNames.put("HRK", "Croatian Kuna");
         currencyNames.put("HUF", "Hungarian Forint");
