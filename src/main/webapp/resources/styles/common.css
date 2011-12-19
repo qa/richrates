@@ -34,6 +34,7 @@ td.skin-chooser {
     vertical-align: top;
     padding-top: 5px;
     padding-right: 10px;
+    text-align: right;
 }
 
 td.skin-chooser select {
@@ -92,7 +93,7 @@ div.flags td {
     width: 54px;
 }
 
-div.flags input {
+div.flags img {
     width: 48px;
     z-index: 1;
 }

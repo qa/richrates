@@ -51,7 +51,7 @@
 
             <div id="header"><ui:insert name="header">
                     <h:panelGroup>
-                        <table width="100%">
+                        <table style="width: 100%">
                             <tbody>
                                 <tr>
                                     <td class="app-title">
@@ -59,7 +59,7 @@
                                             <span>RichRates</span>
                                         </a>
                                     </td>
-                                    <td align="right" class="skin-chooser">
+                                    <td class="skin-chooser">
                                         <h:form id="skin">
                                             <h:selectOneMenu id="select" value="#{skinBean.skin}" onchange="submit()">
                                                 <f:selectItem itemLabel="Emerald Town" itemValue="emeraldTown" />
@@ -76,7 +76,7 @@
                                 <tr>
                                     <td colspan="2">
                                         <h:form id="menuForm">
-                                            <rich:toolbar id="menuBar" itemSeparator="disc">
+                                            <rich:toolbar id="menuBar" itemSeparator="disc" style="width: 100%;">
                                                 <rich:menuItem id="index" action="index?faces-redirect=true" label="Calculator" />
                                                 <rich:menuItem id="table" action="table?faces-redirect=true" label="Exchange Rates" />
                                                 <rich:menuItem id="chart" action="chart?faces-redirect=true" label="Chart" />
