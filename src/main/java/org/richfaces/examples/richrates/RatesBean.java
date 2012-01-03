@@ -1,6 +1,6 @@
 /*******************************************************************************
  * JBoss, Home of Professional Open Source
- * Copyright 2010-2011, Red Hat, Inc. and individual contributors
+ * Copyright 2010-2012, Red Hat, Inc. and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -61,7 +61,6 @@ import annotation.IssueDate;
  * names for currencies (e.g. American Dollar for USD).
  * 
  * @author <a href="mailto:ppitonak@redhat.com">Pavol Pitonak</a>
- * @version $Revision$
  */
 @Named
 @ApplicationScoped
@@ -94,7 +93,6 @@ public class RatesBean implements Serializable {
         currencyNames.put("CNY", "Chinese Yuan Renminbi");
         currencyNames.put("CZK", "Czech Koruna");
         currencyNames.put("DKK", "Danish Krone");
-        currencyNames.put("EEK", "Estonian Kroon");
         currencyNames.put("GBP", "British Pound");
         currencyNames.put("HRK", "Croatian Kuna");
         currencyNames.put("HUF", "Hungarian Forint");
