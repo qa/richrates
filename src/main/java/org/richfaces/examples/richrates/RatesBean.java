@@ -61,7 +61,6 @@ import annotation.IssueDate;
  * names for currencies (e.g. American Dollar for USD).
  * 
  * @author <a href="mailto:ppitonak@redhat.com">Pavol Pitonak</a>
- * @version $Revision$
  */
 @Named
 @ApplicationScoped

@@ -44,7 +44,6 @@ import annotation.IssueDate;
  * Bean used on the page with chart. Is is possible to draw a chart for one currency for selected time range.
  * 
  * @author <a href="mailto:ppitonak@redhat.com">Pavol Pitonak</a>
- * @version $Revision$
  */
 @Named
 @SessionScoped

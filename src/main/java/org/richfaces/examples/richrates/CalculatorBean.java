@@ -37,7 +37,6 @@ import annotation.IssueDate;
  * Bean for the main page. It is possible to convert from Euro to another currency or from another currency to Euro.
  * 
  * @author <a href="mailto:ppitonak@redhat.com">Pavol Pitonak</a>
- * @version $Revision$
  */
 @Named
 @SessionScoped

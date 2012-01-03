@@ -30,7 +30,6 @@ import javax.inject.Named;
  * A bean storing user's selected skin.
  * 
  * @author <a href="mailto:ppitonak@redhat.com">Pavol Pitonak</a>
- * @version $Revision$
  */
 @Named
 @SessionScoped

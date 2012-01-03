@@ -36,7 +36,6 @@ import javax.inject.Qualifier;
  * Qualifier for the date on which exchange rates were issued.
  * 
  * @author <a href="mailto:ppitonak@redhat.com">Pavol Pitonak</a>
- * @version $Revision$
  */
 @Qualifier
 @Target({ TYPE, METHOD, PARAMETER, FIELD })

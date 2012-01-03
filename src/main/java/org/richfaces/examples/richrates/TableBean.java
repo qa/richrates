@@ -34,7 +34,6 @@ import annotation.IssueDate;
  * A bean used on the page with table.
  * 
  * @author <a href="mailto:ppitonak@redhat.com">Pavol Pitonak</a>
- * @version $Revision$
  */
 @Named
 @SessionScoped
