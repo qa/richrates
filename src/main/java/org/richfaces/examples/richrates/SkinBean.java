@@ -23,6 +23,7 @@ package org.richfaces.examples.richrates;
 
 import java.io.Serializable;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
@@ -36,7 +37,12 @@ import javax.inject.Named;
 public class SkinBean implements Serializable {
 
     private static final long serialVersionUID = -1L;
-    private String skin = "blueSky";
+    private String skin;
+    
+    @PostConstruct
+    public void init() {
+        skin = "blueSky";
+    }
 
     /**
      * Getter for user's skin.
