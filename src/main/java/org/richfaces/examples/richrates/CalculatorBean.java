@@ -30,8 +30,9 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.Min;
 
-import annotation.ExchangeRates;
-import annotation.IssueDate;
+import org.richfaces.examples.richrates.annotation.ExchangeRates;
+import org.richfaces.examples.richrates.annotation.IssueDate;
+
 
 /**
  * Bean for the main page. It is possible to convert from Euro to another currency or from another currency to Euro.

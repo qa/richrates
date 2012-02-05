@@ -49,12 +49,12 @@ import org.jdom.JDOMException;
 import org.jdom.Namespace;
 import org.jdom.input.SAXBuilder;
 import org.joda.time.DateTime;
+import org.richfaces.examples.richrates.annotation.CurrenciesNames;
+import org.richfaces.examples.richrates.annotation.ExchangeRates;
+import org.richfaces.examples.richrates.annotation.IssueDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import annotation.CurrenciesNames;
-import annotation.ExchangeRates;
-import annotation.IssueDate;
 
 /**
  * The main bean of the application. It downloads a data file from the Internet and parses it. It contains also long

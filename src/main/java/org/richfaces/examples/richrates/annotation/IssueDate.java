@@ -19,7 +19,7 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  *******************************************************************************/
-package annotation;
+package org.richfaces.examples.richrates.annotation;
 
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
@@ -33,12 +33,12 @@ import java.lang.annotation.Target;
 import javax.inject.Qualifier;
 
 /**
- * Qualifier for exchange rates.
+ * Qualifier for the date on which exchange rates were issued.
  * 
  * @author <a href="mailto:ppitonak@redhat.com">Pavol Pitonak</a>
  */
 @Qualifier
 @Target({ TYPE, METHOD, PARAMETER, FIELD })
 @Retention(RUNTIME)
-public @interface ExchangeRates {
+public @interface IssueDate {
 }

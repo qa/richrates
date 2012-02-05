@@ -28,7 +28,8 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import annotation.IssueDate;
+import org.richfaces.examples.richrates.annotation.IssueDate;
+
 
 /**
  * A bean used on the page with table.
