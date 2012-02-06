@@ -12,6 +12,7 @@
 
     <engine>
         <!-- <property name="maxTestClassesBeforeRestart">10</property> -->
+        <!-- copy the deployed archive to target directory so user can check its content -->
         <property name="deploymentExportPath">target/</property>
     </engine>
 
