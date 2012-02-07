@@ -39,11 +39,11 @@ import org.richfaces.examples.richrates.annotation.IssueDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 /**
  * Bean used on the page with chart. Is is possible to draw a chart for one currency for selected time range.
  * 
  * @author <a href="mailto:ppitonak@redhat.com">Pavol Pitonak</a>
+ * @since 4.1
  */
 @Named
 @SessionScoped

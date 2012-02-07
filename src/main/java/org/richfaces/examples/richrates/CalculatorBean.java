@@ -33,11 +33,11 @@ import javax.validation.constraints.Min;
 import org.richfaces.examples.richrates.annotation.ExchangeRates;
 import org.richfaces.examples.richrates.annotation.IssueDate;
 
-
 /**
  * Bean for the main page. It is possible to convert from Euro to another currency or from another currency to Euro.
  * 
  * @author <a href="mailto:ppitonak@redhat.com">Pavol Pitonak</a>
+ * @since 4.1
  */
 @Named
 @SessionScoped

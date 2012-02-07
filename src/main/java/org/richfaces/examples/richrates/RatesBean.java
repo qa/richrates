@@ -55,12 +55,12 @@ import org.richfaces.examples.richrates.annotation.IssueDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 /**
  * The main bean of the application. It downloads a data file from the Internet and parses it. It contains also long
  * names for currencies (e.g. American Dollar for USD).
  * 
  * @author <a href="mailto:ppitonak@redhat.com">Pavol Pitonak</a>
+ * @since 4.1
  */
 @Named
 @ApplicationScoped

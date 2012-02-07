@@ -30,11 +30,11 @@ import javax.inject.Named;
 
 import org.richfaces.examples.richrates.annotation.IssueDate;
 
-
 /**
  * A bean used on the page with table.
  * 
  * @author <a href="mailto:ppitonak@redhat.com">Pavol Pitonak</a>
+ * @since 4.1
  */
 @Named
 @SessionScoped

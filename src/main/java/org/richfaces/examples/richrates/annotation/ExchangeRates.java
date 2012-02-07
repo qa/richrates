@@ -36,6 +36,7 @@ import javax.inject.Qualifier;
  * Qualifier for exchange rates.
  * 
  * @author <a href="mailto:ppitonak@redhat.com">Pavol Pitonak</a>
+ * @since 4.1
  */
 @Qualifier
 @Target({ TYPE, METHOD, PARAMETER, FIELD })
