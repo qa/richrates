@@ -35,9 +35,11 @@
         <style type="text/css">
             html {
                 height: 100%;
-                background: #{richSkin.additionalBackgroundColor};
-                background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #{richSkin.generalBackgroundColor}), color-stop(0.3, #{richSkin.additionalBackgroundColor}), color-stop(1, rgb(255,255,255))) no-repeat;
-                background: -moz-linear-gradient(center bottom, #{richSkin.generalBackgroundColor} 0%, #{richSkin.additionalBackgroundColor} 50%, rgb(255, 255, 255) 100%);
+                background: linear-gradient(bottom, #{richSkin.generalBackgroundColor} 0%, #{richSkin.additionalBackgroundColor} 30%, rgb(255, 255, 255) 100%);
+                background: -webkit-linear-gradient(bottom, #{richSkin.generalBackgroundColor} 0%, #{richSkin.additionalBackgroundColor} 30%, rgb(255, 255, 255) 100%);
+                background: -o-linear-gradient(bottom, #{richSkin.generalBackgroundColor} 0%, #{richSkin.additionalBackgroundColor} 30%, rgb(255, 255, 255) 100%);
+                background: -moz-linear-gradient(center bottom, #{richSkin.generalBackgroundColor} 0%, #{richSkin.additionalBackgroundColor} 30%, rgb(255, 255, 255) 100%);
+                background: -ms-linear-gradient(bottom, #{richSkin.generalBackgroundColor} 0%, #{richSkin.additionalBackgroundColor} 30%, rgb(255, 255, 255) 100%);
                 background-attachment: fixed;
             }
 
