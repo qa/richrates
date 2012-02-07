@@ -29,6 +29,8 @@
         <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
         <f:loadBundle basename="org.richfaces.examples.richrates.messages" var="msgs" />
         <h:outputStylesheet library="styles" name="common.css"/>
+        <!-- dropdownmenu.ecss not loaded automatically (RF-11958) -->
+        <h:outputStylesheet library="org.richfaces" name="dropdownmenu.ecss"/>
         <link rel="shortcut icon" href="#{request.contextPath}/resources/images/favicon.ico" />
         <style type="text/css">
             html {
