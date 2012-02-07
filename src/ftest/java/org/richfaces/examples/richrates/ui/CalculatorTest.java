@@ -103,24 +103,22 @@ public class CalculatorTest extends Arquillian {
     }
 
     @Test
-    public void testSelectCzechKoruna() {
+    public void testCalculate() {
         driver.get(deploymentURL.toString());
 
-        driver.findElement(By.cssSelector("input[title='Czech Koruna']")).click();
-
         WebDriverWait wait = new WebDriverWait(driver, 5000);
-        wait.until(visibilityOfElementLocated(By.cssSelector("img[title='Czech Koruna']")));
 
-        driver.findElement(By.id("calculator:amount")).sendKeys("33");
-        driver.findElement(By.id("calculator:calculateButton")).click();
-
-        // FIXME waits for infinitely
+        WebElement amountInput = driver.findElement(By.id("calculator:amount")); 
+        amountInput.clear();
+        amountInput.sendKeys("33");
+        amountInput.submit();
+        
         wait.until(notEmptyText(By.cssSelector("div.result")));
 
         String result = driver.findElement(By.cssSelector("div.result")).getText();
 
-        System.out.println("*** " + result);
-        Assert.assertTrue(result.matches("33.000 EUR = \\d+\\.\\d{3} CZK"),
-            "Result should start match expression \"33.000 EUR = \\d+\\.\\d{3} CZK\".");
+        Assert.assertTrue(result.matches("33.000 EUR = \\d+\\.\\d{3} USD"),
+            "Result should start match expression \"33.000 EUR = \\d+\\.\\d{3} USD\".");
+        Assert.assertNotEquals(result, "33.000 EUR = 0.000 USD", "Exchange rate for USD should not be 0.");
     }
 }
