@@ -1,6 +1,6 @@
 /*******************************************************************************
  * JBoss, Home of Professional Open Source
- * Copyright 2010-2011, Red Hat, Inc. and individual contributors
+ * Copyright 2010-2012, Red Hat, Inc. and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -36,7 +36,6 @@ import javax.inject.Qualifier;
  * Qualifier for the date on which exchange rates were issued.
  * 
  * @author <a href="mailto:ppitonak@redhat.com">Pavol Pitonak</a>
- * @version $Revision$
  */
 @Qualifier
 @Target({ TYPE, METHOD, PARAMETER, FIELD })

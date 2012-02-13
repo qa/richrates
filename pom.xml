@@ -21,7 +21,7 @@
     <groupId>org.richfaces.examples</groupId>
     <artifactId>richrates</artifactId>
     <name>RichRates</name>
-    <version>4.1.0-SNAPSHOT</version>
+    <version>4.2.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <description>RichFaces application for exchange rates.</description>
     <url>http://jboss.org/richfaces</url>
@@ -82,7 +82,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <version.richfaces>4.1.0.Final</version.richfaces>
+        <version.richfaces>4.2.0-SNAPSHOT</version.richfaces>
     </properties>
 
     <dependencyManagement>
@@ -98,7 +98,7 @@
     </dependencyManagement>
 
     <dependencies>
-		<!-- Dependencies for RichFaces -->
+        <!-- Dependencies for RichFaces -->
         <dependency>
             <groupId>org.richfaces.ui</groupId>
             <artifactId>richfaces-components-ui</artifactId>
@@ -126,7 +126,7 @@
         <!-- Dependencies for Servlet -->
         <dependency>
             <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
+            <artifactId>javax.servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
 
