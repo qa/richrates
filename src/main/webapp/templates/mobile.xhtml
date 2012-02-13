@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j">
+
+    <!--
+    JBoss, Home of Professional Open Source
+    Copyright 2010-2012, Red Hat, Inc. and individual contributors
+    by the @authors tag. See the copyright.txt in the distribution for a
+    full listing of individual contributors.
+    
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 2.1 of
+    the License, or (at your option) any later version.
+
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+    -->
+    
+    <h:head>
+        <title><ui:insert name="title">RichRates</ui:insert></title>
+        
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+        <!-- enable full-screen mode -->
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <!-- controls the appearance of the status bar in full-screen mode -->
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        
+        <f:loadBundle basename="org.richfaces.examples.richrates.messages" var="msgs" />
+        <h:outputScript name="jsf.js" library="javax.faces" />
+        <h:outputStylesheet library="styles" name="mobile.css"/>
+        <h:outputStylesheet library="styles" name="rf-mobile-skin.css"/>
+        <link rel="shortcut icon" href="#{request.contextPath}/resources/images/favicon.ico" />
+        <style type="text/css">
+            html {
+                height: 100%;
+                background: linear-gradient(bottom, #{richSkin.generalBackgroundColor} 0%, #{richSkin.additionalBackgroundColor} 30%, rgb(255, 255, 255) 100%);
+                background: -webkit-linear-gradient(bottom, #{richSkin.generalBackgroundColor} 0%, #{richSkin.additionalBackgroundColor} 30%, rgb(255, 255, 255) 100%);
+                background: -o-linear-gradient(bottom, #{richSkin.generalBackgroundColor} 0%, #{richSkin.additionalBackgroundColor} 30%, rgb(255, 255, 255) 100%);
+                background: -moz-linear-gradient(center bottom, #{richSkin.generalBackgroundColor} 0%, #{richSkin.additionalBackgroundColor} 30%, rgb(255, 255, 255) 100%);
+                background: -ms-linear-gradient(bottom, #{richSkin.generalBackgroundColor} 0%, #{richSkin.additionalBackgroundColor} 30%, rgb(255, 255, 255) 100%);
+                background-attachment: fixed;
+            }
+
+            .text-footer {
+                color: #{richSkin.generalTextColor};
+            }
+
+            .text-footer a {
+                font-size: medium;
+                font-family: verdana;
+            }
+
+            .rf-msg-sum {
+                color: #{richSkin.generalTextColor};
+            }
+        </style>
+        <ui:insert name="head" />
+    </h:head>
+
+    <h:body>
+        <div id="wrap">
+
+            <div id="header">
+                <ui:insert name="header">
+                    <h:form id="menuForm">
+                        <rich:toolbar id="menuBar" itemSeparator="none" >
+                            <h:link id="calculatorLink" outcome="/mobile/calculator" value="Calculator" styleClass="button-link"/>
+                            <h:link id="tableLink" outcome="/mobile/table" value="Table" styleClass="button-link"/>
+                            <h:link id="chartLink" outcome="/mobile/chart" value="Chart" styleClass="button-link"/>
+                            <rich:toolbarGroup location="right">                        
+                                <h:selectOneMenu id="select" value="#{skinBean.skin}" onchange="submit()">
+                                    <f:selectItem itemLabel="Emerald Town" itemValue="emeraldTown" />
+                                    <f:selectItem itemLabel="Blue Sky" itemValue="blueSky" />
+                                    <f:selectItem itemLabel="Ruby" itemValue="ruby" />
+                                    <f:selectItem itemLabel="Wine" itemValue="wine" />
+                                    <f:selectItem itemLabel="Japan Cherry" itemValue="japanCherry" />
+                                    <f:selectItem itemLabel="Classic" itemValue="classic" />
+                                    <f:selectItem itemLabel="Deep Marine" itemValue="deepMarine" />
+                                </h:selectOneMenu>
+                            </rich:toolbarGroup>
+                        </rich:toolbar>
+                    </h:form>
+                </ui:insert>
+            </div>
+
+            <div id="main">
+                <ui:insert name="main">Default main text</ui:insert>
+            </div>
+        </div>
+
+        <div id="footer" style="display: none;">
+            <ui:insert name="footer">
+                <hr/>
+                <div class="text-footer">
+                    Powered by <a href="http://jboss.org/richfaces">RichFaces 4</a>.
+                    Data by <a href="http://www.ecb.int">European Central Bank</a>.
+                    Flags by <a href="http://flags.redpixart.com/">RedpixArt</a>.
+                </div>
+            </ui:insert>
+        </div>
+
+    </h:body>
+
+
+</html>
+

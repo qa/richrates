@@ -25,12 +25,12 @@
 
     <c:choose>
         <c:when test="#{userAgent.phone}">
-            <ui:include src="/mobile.xhtml">
+            <ui:include src="/mobile/calculator.xhtml">
                 [phone]
             </ui:include>
         </c:when>
         <c:when test="#{userAgent.tablet}">
-            <ui:include src="/mobile.xhtml">
+            <ui:include src="/mobile/calculator.xhtml">
                 [tablet]
             </ui:include>
         </c:when>
