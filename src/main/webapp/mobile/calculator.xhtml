@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:rich="http://richfaces.org/rich" xmlns:a4j="http://richfaces.org/a4j" lang="en">
+    xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:rich="http://richfaces.org/rich" xmlns:a4j="http://richfaces.org/a4j"
+    lang="en">
 <body>
     <ui:composition template="/templates/mobile.xhtml">
 
         <ui:define name="head">
-            <h:outputScript library="scripts" name="richrates.js" />
             <h:outputScript target="head">
                 function showFlags() {
                     jQuery('div.flags').fadeIn(500);
@@ -50,9 +50,9 @@
                             <rich:message id="dateMsg" for="date" showDetail="false" showSummary="false"
                                 style="width: 16px; height: 16px;" />
 
-
                             <h:outputLabel value="Amount:" for="amount" />
-                            <h:inputText id="amount" value="#{calculatorBean.amount}" required="true" label="Amount">
+                            <h:inputText id="amount" value="#{calculatorBean.amount}" required="true" label="Amount"
+                                style="width: 150px;">
                                 <rich:validator />
                             </h:inputText>
                             <rich:message id="amountMsg" for="amount" showDetail="false" showSummary="false" />
@@ -61,7 +61,7 @@
                                 action="#{calculatorBean.calculate}" render="calculatorPanel" />
                         </h:panelGrid>
 
-                        <div class="result">
+                        <div class="result" style="font-weight: bold; font-size: large">
                             <h:panelGroup rendered="#{calculatorBean.amount > 0}">
                                 <h:outputText value="#{calculatorBean.amount}">
                                     <f:convertNumber minFractionDigits="3" maxFractionDigits="3" />
@@ -77,14 +77,14 @@
                 </a4j:outputPanel>
             </div>
 
-            <div class="flags" style="display:none; position: absolute; left: 30px;">
+            <div class="flags" style="display: none; position: absolute; left: 30px;">
                 <h:form id="flagsForm" prependId="false">
                     <a4j:jsFunction name="changeCurrency" action="#{calculatorBean.selectCurrency}" render="calculatorPanel"
                         oncomplete="hideFlags()">
                         <a4j:param assignTo="#{calculatorBean.selectedCurrency}" name="currency" value="#{code}" />
                     </a4j:jsFunction>
 
-                    <rich:dataGrid value="#{ratesBean.codes}" id="flags" var="code" columns="3">
+                    <rich:dataGrid value="#{ratesBean.codes}" id="flags" var="code" columns="4">
                         <h:graphicImage id="flag" library="flags" name="#{code}_64.png"
                             title="#{ratesBean.currenciesNames[code]}" onmouseover="this.style.cursor='pointer'"
                             alt="Flag #{code}" onclick="changeCurrency('#{code}')" />

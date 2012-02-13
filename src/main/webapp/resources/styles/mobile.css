@@ -1,4 +1,4 @@
-* {
+html, body {
     margin: 0;
 }
 
@@ -79,6 +79,14 @@ div.flags img {
     background-color: transparent;
 }
 
+.rf-tb-itm {
+    padding: 3px 3px !important;
+}
+
+.rf-cal-inp {
+    width: 150px;
+}
+
 a.button-link {
     color: #050505;
     padding: 5px 10px;
@@ -96,7 +104,7 @@ a.button-link {
 }
 
 /*
-page calculator
+page calculator.xhtml
 */
 .calculator {
     float: left;
@@ -111,6 +119,25 @@ page calculator
     margin-top: 15px;
 }
 
+.rf-dg {
+    background-color: transparent !important;
+}
+
+/*
+page table.xhtml
+*/
+.rich-datascr-button {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.datesForm td:nth-child(2) {
+	white-space: nowrap;
+}
+
+/*
+page chart.xhtml
+*/
 .rf-dg {
     background-color: transparent !important;
 }

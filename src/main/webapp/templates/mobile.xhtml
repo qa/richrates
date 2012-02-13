@@ -37,8 +37,9 @@
         
         <f:loadBundle basename="org.richfaces.examples.richrates.messages" var="msgs" />
         <h:outputScript name="jsf.js" library="javax.faces" />
-        <h:outputStylesheet library="styles" name="mobile.css"/>
+        <h:outputScript library="scripts" name="richrates.js" />
         <h:outputStylesheet library="styles" name="rf-mobile-skin.css"/>
+        <h:outputStylesheet library="styles" name="mobile.css"/>
         <link rel="shortcut icon" href="#{request.contextPath}/resources/images/favicon.ico" />
         <style type="text/css">
             html {
@@ -73,10 +74,11 @@
             <div id="header">
                 <ui:insert name="header">
                     <h:form id="menuForm">
-                        <rich:toolbar id="menuBar" itemSeparator="none" >
+                        <rich:toolbar id="menuBar" itemSeparator="none" height="35px;">
                             <h:link id="calculatorLink" outcome="/mobile/calculator" value="Calculator" styleClass="button-link"/>
                             <h:link id="tableLink" outcome="/mobile/table" value="Table" styleClass="button-link"/>
                             <h:link id="chartLink" outcome="/mobile/chart" value="Chart" styleClass="button-link"/>
+                            <ui:remove>
                             <rich:toolbarGroup location="right">                        
                                 <h:selectOneMenu id="select" value="#{skinBean.skin}" onchange="submit()">
                                     <f:selectItem itemLabel="Emerald Town" itemValue="emeraldTown" />
@@ -88,12 +90,13 @@
                                     <f:selectItem itemLabel="Deep Marine" itemValue="deepMarine" />
                                 </h:selectOneMenu>
                             </rich:toolbarGroup>
+                            </ui:remove>
                         </rich:toolbar>
                     </h:form>
                 </ui:insert>
             </div>
 
-            <div id="main">
+            <div id="main" style="margin-left: 10px;">
                 <ui:insert name="main">Default main text</ui:insert>
             </div>
         </div>

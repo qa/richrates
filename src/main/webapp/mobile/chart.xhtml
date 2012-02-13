@@ -6,11 +6,139 @@
     <ui:composition template="/templates/mobile.xhtml">
 
         <ui:define name="head">
+            <h:outputScript name="jquery.js" />
+            <h:outputScript library="scripts" name="richrates.js" />
+            <h:outputScript library="scripts/flot" name="jquery.flot.min.js" />
+            <h:outputScript library="scripts/flot" name="jquery.flot.crosshair.min.js" />
+            <h:outputScript library="scripts/flot" name="jquery.flot.fillbetween.min.js" />
+            <h:outputScript library="scripts/flot" name="jquery.flot.image.min.js" />
+            <h:outputScript library="scripts/flot" name="jquery.flot.navigate.min.js" />
+            <h:outputScript library="scripts/flot" name="jquery.flot.pie.min.js" />
+            <h:outputScript library="scripts/flot" name="jquery.flot.resize.min.js" />
+            <h:outputScript library="scripts/flot" name="jquery.flot.selection.min.js" />
+            <h:outputScript library="scripts/flot" name="jquery.flot.stack.min.js" />
+            <h:outputScript library="scripts/flot" name="jquery.flot.symbol.min.js" />
+            <h:outputScript library="scripts/flot" name="jquery.flot.threshold.min.js" />
+            <h:outputScript library="scripts/flot" name="jquery.colorhelpers.min.js" />
+            <h:outputScript target="head">
+                function showFlags() {
+                    jQuery('div.flags').fadeIn(500);
+                    jQuery('div.chart').fadeOut(500);
+                }
+                function hideFlags() {
+                    jQuery('div.flags').fadeOut(500);
+                    jQuery('div.chart').fadeIn(500);
+                }
+            </h:outputScript>
         </ui:define>
 
         <ui:define name="main">
+            <rich:dragIndicator id="indicator" />
 
-            <p>Content of mobile page chart.xhtml</p>
+            <div class="chart" style="float: left;">
+                <h:form id="dateForm" style="margin-bottom: 20px">
+                    <rich:messages />
+                    <rich:graphValidator value="#{chartBean}">
+                        <h:panelGrid columns="3" styleClass="datesForm">
+                            <h:outputLabel value="From date" for="fromDate" style="white-space: nowrap;" />
+                            <rich:calendar id="fromDate" value="#{chartBean.fromDate}" required="true" styleClass="calendar"
+                                boundaryDatesMode="select" dayDisableFunction="disablementFunction" defaultLabel="Select a date"
+                                dayClassFunction="disabledClassesProv" validator="#{ratesBean.validateDate}"
+                                style="white-space: nowrap;" timeZone="#{ratesBean.timeZone}" />
+
+                            <rich:message id="fromDateMsg" for="fromDate" showDetail="false" showSummary="false" />
+
+                            <h:outputLabel value="To date" for="toDate" style="white-space: nowrap;" />
+                            <rich:calendar id="toDate" value="#{chartBean.toDate}" required="true" styleClass="calendar"
+                                boundaryDatesMode="select" dayDisableFunction="disablementFunction" defaultLabel="Select a date"
+                                dayClassFunction="disabledClassesProv" validator="#{ratesBean.validateDate}"
+                                style="white-space: nowrap;" timeZone="#{ratesBean.timeZone}" />
+
+                            <rich:message id="toDateMsg" for="toDate" showDetail="false" showSummary="false" />
+
+                            <a4j:commandButton id="displayButton" value="Display" render="chart" />
+                            <h:graphicImage id="flag" library="flags" name="#{chartBean.selectedCurrency}_64.png"
+                                title="#{ratesBean.currenciesNames[chartBean.selectedCurrency]}" 
+                                onmouseover="this.style.cursor='pointer'"
+                                alt="Flag #{chartBean.selectedCurrency}" onclick="showFlags()" 
+                                style="float: right; height: 32px;"/>
+                        </h:panelGrid>
+                    </rich:graphValidator>
+
+                </h:form>
+                <h:form id="chartForm">
+                    <a4j:outputPanel id="chartPanel" styleClass="chart-panel" layout="block" ajaxRendered="true"
+                        style="width: 300px; height: 200px;">
+                        <script type="text/javascript">
+							var plot = jQuery.plot(jQuery("div.chart-panel"),
+							        [{data : #{chartBean.currencyData}, color : '#{richSkin.generalLinkColor}', 
+										label : '#{chartBean.selectedCurrency}' }],							
+															 
+						            {
+										yaxis : { autoscaleMargin : 0.02 }, 
+								        grid : { 
+								        	hoverable : true, 
+								        	clickable : true 
+								        	},
+										xaxis : { 
+											mode : "time" 
+											}, 
+										points : { 
+											show : true 
+											}, 
+										lines : { 
+											show : true 
+											}  
+									});
+									
+							function showTooltip(x, y, contents) {
+			                    $('<div id="tooltip">' + contents + '</div>').css( {
+			                        position: 'absolute',
+			                        display: 'none',
+			                        top: y + 5,
+			                        left: x + 5,
+			                        border: '1px solid #fdd',
+			                        padding: '2px',
+			                        'background-color': '#fee',
+			                        opacity: 0.80
+			                    }).appendTo('div#main').fadeIn(200);
+			                }
+							
+							var previousPoint = null;
+							
+							$('div.chart-panel').bind('plothover', function (event, pos, item) {
+                                if (item) {
+                                    if (previousPoint != item.dataIndex) {
+                                        previousPoint = item.dataIndex;
+                                        $('#tooltip').remove();
+                                        var x = item.datapoint[0].toFixed(2),
+                                        y = item.datapoint[1].toFixed(2);
+                                        showTooltip(item.pageX, item.pageY, '1 EUR = ' + y + ' #{chartBean.selectedCurrency}');
+                                    }
+                                }
+                                else {
+                                    $('#tooltip').remove();
+                                    previousPoint = null;            
+                                }
+                            });
+         				</script>
+                    </a4j:outputPanel>
+                </h:form>
+            </div>
+
+            <div class="flags" style="display: none; position: absolute; left: 30px;">
+                <h:form id="flagsForm" prependId="false">
+                    <a4j:jsFunction name="changeCurrency" render="chartPanel,dateForm" oncomplete="hideFlags()">
+                        <a4j:param assignTo="#{chartBean.selectedCurrency}" name="currency" value="#{code}" />
+                    </a4j:jsFunction>
+
+                    <rich:dataGrid value="#{ratesBean.codes}" id="flags" var="code" columns="4">
+                        <h:graphicImage id="flag" library="flags" name="#{code}_64.png"
+                            title="#{ratesBean.currenciesNames[code]}" onmouseover="this.style.cursor='pointer'"
+                            alt="Flag #{code}" onclick="changeCurrency('#{code}')" />
+                    </rich:dataGrid>
+                </h:form>
+            </div>
         </ui:define>
     </ui:composition>
 </body>
