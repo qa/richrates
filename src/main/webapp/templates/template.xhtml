@@ -28,6 +28,7 @@
         <title><ui:insert name="title">Default title</ui:insert></title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <f:loadBundle basename="org.richfaces.examples.richrates.messages" var="msgs" />
+        <h:outputScript name="jsf.js" library="javax.faces" />
         <h:outputStylesheet library="styles" name="common.css"/>
         <!-- dropdownmenu.ecss not loaded automatically (RF-11958) -->
         <h:outputStylesheet library="org.richfaces" name="dropdownmenu.ecss"/>
@@ -103,7 +104,7 @@
                                     <td colspan="2">
                                         <h:form id="menuForm">
                                             <rich:toolbar id="menuBar" itemSeparator="disc" style="width: 100%;">
-                                                <rich:menuItem id="index" action="index?faces-redirect=true" label="Calculator" />
+                                                <rich:menuItem id="index" action="calculator?faces-redirect=true" label="Calculator" />
                                                 <rich:menuItem id="table" action="table?faces-redirect=true" label="Exchange Rates" />
                                                 <rich:menuItem id="chart" action="chart?faces-redirect=true" label="Chart" />
                                             </rich:toolbar>
@@ -134,6 +135,4 @@
 
     </h:body>
 
-
 </html>
-

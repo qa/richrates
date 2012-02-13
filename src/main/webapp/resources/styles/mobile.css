@@ -1,0 +1,143 @@
+html, body {
+    margin: 0;
+}
+
+#wrap {
+    margin: auto;
+    height: auto;
+}
+
+#footer {
+    clear: both;
+    position: relative;
+    padding-top: 1em;
+    height: 2em;
+}
+
+.text-footer {
+    padding-top: 5px;
+    font-size: x-small;
+}
+
+td.skin-chooser {
+    vertical-align: top;
+    padding-top: 5px;
+    padding-right: 10px;
+    text-align: right;
+}
+
+td.skin-chooser select {
+    width: 120px;
+}
+
+a:link {
+    text-decoration: none;
+    font-size: x-small;
+}
+
+a:visited {
+    text-decoration: none;
+    font-size: x-small;
+}
+
+a:active {
+    text-decoration: none;
+    font-size: x-small;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.calendar {
+    width: 235px;
+}
+
+.disabled-day {
+    color: gray !important;
+}
+
+div.flags {
+    float: left;
+}
+
+div.flags table {
+    border: none;
+}
+
+div.flags td {
+    border: none;
+    width: 54px;
+}
+
+div.flags img {
+    width: 48px;
+    z-index: 1;
+}
+
+.rf-dt {
+    background-color: transparent;
+}
+
+.rf-tb-itm {
+    padding: 3px 3px !important;
+}
+
+.rf-cal-inp {
+    width: 150px;
+}
+
+a.button-link {
+    color: #050505;
+    padding: 5px 10px;
+    background: -moz-linear-gradient(top, #ffffff 0%, #ebebeb 50%, #dbdbdb 50%, #b5b5b5);
+    background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), color-stop(0.50, #ebebeb), color-stop(0.50, #dbdbdb),
+        to(#b5b5b5) );
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border: 1px solid #949494;
+    -moz-box-shadow: 0px 1px 3px rgba(000, 000, 000, 0.5), inset 0px 0px 2px rgba(255, 255, 255, 1);
+    -webkit-box-shadow: 0px 1px 3px rgba(000, 000, 000, 0.5), inset 0px 0px 2px rgba(255, 255, 255, 1);
+    text-shadow: 0px -1px 0px rgba(000, 000, 000, 0.2), 0px 1px 0px rgba(255, 255, 255, 1);
+    text-decoration: none;
+}
+
+/*
+page calculator.xhtml
+*/
+.calculator {
+    float: left;
+}
+
+.calculator table {
+    margin: 0;
+}
+
+.result {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.rf-dg {
+    background-color: transparent !important;
+}
+
+/*
+page table.xhtml
+*/
+.rich-datascr-button {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.datesForm td:nth-child(2) {
+	white-space: nowrap;
+}
+
+/*
+page chart.xhtml
+*/
+.rf-dg {
+    background-color: transparent !important;
+}

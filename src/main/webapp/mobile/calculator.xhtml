@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:rich="http://richfaces.org/rich" xmlns:a4j="http://richfaces.org/a4j"
+    lang="en">
+<body>
+    <ui:composition template="/templates/mobile.xhtml">
+
+        <ui:define name="head">
+            <h:outputScript target="head">
+                function showFlags() {
+                    jQuery('div.flags').fadeIn(500);
+                    jQuery('div.calculator').fadeOut(500);
+                }
+                function hideFlags() {
+                    jQuery('div.flags').fadeOut(500);
+                    jQuery('div.calculator').fadeIn(500);
+                }
+            </h:outputScript>
+        </ui:define>
+
+        <ui:define name="main">
+            <div class="calculator">
+                <a4j:outputPanel id="calculatorPanel" layout="block">
+                    <h:form id="calculator">
+                        <h:panelGrid columns="4">
+                            <h:graphicImage id="firstCurrency" library="flags"
+                                name="#{calculatorBean.fromEuro ? 'EUR' : calculatorBean.selectedCurrency}_128.png"
+                                alt="#{calculatorBean.fromEuro ? 'Euro' : ratesBean.currenciesNames[calculatorBean.selectedCurrency]}"
+                                title="#{calculatorBean.fromEuro ? 'Euro' : ratesBean.currenciesNames[calculatorBean.selectedCurrency]}"
+                                onclick="showFlags()" />
+
+                            <a4j:commandButton id="swap" type="image" image="/resources/images/swap-gray.png"
+                                style="width: 32px;" title="Swap currencies" onmouseover="this.style.cursor='pointer'"
+                                render="calculatorPanel" action="#{calculatorBean.swap}" />
+
+                            <h:graphicImage id="secondCurrency" library="flags"
+                                name="#{calculatorBean.fromEuro ? calculatorBean.selectedCurrency : 'EUR'}_128.png"
+                                alt="#{calculatorBean.fromEuro ? ratesBean.currenciesNames[calculatorBean.selectedCurrency] : 'Euro'}"
+                                title="#{calculatorBean.fromEuro ? ratesBean.currenciesNames[calculatorBean.selectedCurrency] : 'Euro'}"
+                                onclick="showFlags()" />
+                        </h:panelGrid>
+
+                        <rich:messages id="validationMsgs" showDetail="false" showSummary="true" />
+                        <h:panelGrid id="form" columns="3" style="padding: 10px;">
+                            <h:outputLabel value="Date:" for="date" />
+                            <rich:calendar id="date" value="#{calculatorBean.selectedDate}" required="true"
+                                styleClass="calendar" boundaryDatesMode="select" dayDisableFunction="disablementFunction"
+                                dayClassFunction="disabledClassesProv" validator="#{ratesBean.validateDate}"
+                                defaultLabel="Select a date" timeZone="#{ratesBean.timeZone}" />
+                            <rich:message id="dateMsg" for="date" showDetail="false" showSummary="false"
+                                style="width: 16px; height: 16px;" />
+
+                            <h:outputLabel value="Amount:" for="amount" />
+                            <h:inputText id="amount" value="#{calculatorBean.amount}" required="true" label="Amount"
+                                style="width: 150px;">
+                                <rich:validator />
+                            </h:inputText>
+                            <rich:message id="amountMsg" for="amount" showDetail="false" showSummary="false" />
+
+                            <a4j:commandButton id="calculateButton" value="Calculate" type="submit"
+                                action="#{calculatorBean.calculate}" render="calculatorPanel" />
+                        </h:panelGrid>
+
+                        <div class="result" style="font-weight: bold; font-size: large">
+                            <h:panelGroup rendered="#{calculatorBean.amount > 0}">
+                                <h:outputText value="#{calculatorBean.amount}">
+                                    <f:convertNumber minFractionDigits="3" maxFractionDigits="3" />
+                                </h:outputText>
+                                <h:outputText value=" #{calculatorBean.fromEuro ? 'EUR' : calculatorBean.selectedCurrency} = " />
+                                <h:outputText value="#{calculatorBean.result}">
+                                    <f:convertNumber minFractionDigits="3" maxFractionDigits="3" />
+                                </h:outputText>
+                                <h:outputText value=" #{calculatorBean.fromEuro ? calculatorBean.selectedCurrency : 'EUR'}" />
+                            </h:panelGroup>
+                        </div>
+                    </h:form>
+                </a4j:outputPanel>
+            </div>
+
+            <div class="flags" style="display: none; position: absolute; left: 30px;">
+                <h:form id="flagsForm" prependId="false">
+                    <a4j:jsFunction name="changeCurrency" action="#{calculatorBean.selectCurrency}" render="calculatorPanel"
+                        oncomplete="hideFlags()">
+                        <a4j:param assignTo="#{calculatorBean.selectedCurrency}" name="currency" value="#{code}" />
+                    </a4j:jsFunction>
+
+                    <rich:dataGrid value="#{ratesBean.codes}" id="flags" var="code" columns="4">
+                        <h:graphicImage id="flag" library="flags" name="#{code}_64.png"
+                            title="#{ratesBean.currenciesNames[code]}" onmouseover="this.style.cursor='pointer'"
+                            alt="Flag #{code}" onclick="changeCurrency('#{code}')" />
+                    </rich:dataGrid>
+                </h:form>
+            </div>
+        </ui:define>
+    </ui:composition>
+</body>
+</html>
