@@ -21,38 +21,13 @@
  *******************************************************************************/
 package org.richfaces.examples.richrates.ui;
 
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import java.net.URL;
 
 /**
  * @author <a href="mailto:jpapouse@redhat.com">Jan Papousek</a>
  */
-public class CalculatorPage {
+public interface Page {
 
-    @FindBy(id = "calculator:amount")
-    private WebElement amountInput;
-    @FindBy(xpath = "//div[contains(@class, 'result')]")
-    private WebElement resultOutput;
-    @FindBy(id = "calculator:calculateButton")
-    private WebElement submitButton;
-    public String getAddress() {
-        return "http://10.0.2.2:8080/richrates";
-    }
-
-    public String getResult() {
-       return resultOutput.getText();
-    }
-    
-    public void setAmount(int amount) {
-        amountInput.click();
-        amountInput.clear();
-        amountInput.sendKeys(String.valueOf(amount));
-        submitButton.click();
-    }
-    
-    public void waitUntilResultOutputIsNotEmpty(WebDriverWait webDriverWait) {
-        webDriverWait.until(new TextNotEquals(resultOutput, ""));
-    }
+    URL getUrl();
     
 }

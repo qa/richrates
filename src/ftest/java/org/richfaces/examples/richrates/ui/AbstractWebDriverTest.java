@@ -21,41 +21,31 @@
  *******************************************************************************/
 package org.richfaces.examples.richrates.ui;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.drone.api.annotation.Drone;
-import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.arquillian.testng.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.importer.ExplodedImporter;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.DependencyResolvers;
 import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
-import org.openqa.selenium.By;
+import org.jboss.test.selenium.android.support.pagefactory.StaleReferenceAwareFieldDecorator;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.FieldDecorator;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
-/**
- * @author <a href="mailto:ppitonak@redhat.com">Pavol Pitonak</a>
- * @since 4.2.0
- */
-public class CalculatorTest extends Arquillian {
+public abstract class AbstractWebDriverTest<P extends Page> extends Arquillian{
 
     @Drone
     private WebDriver driver;
-    private CalculatorPage page;
     
-    public static final String WEBAPP_SRC = "src/main/webapp";
-
+    private P page;
+    
     // TODO include manifest.mf with org.slf4j dependency
     @Deployment(testable = false)
     public static WebArchive createTestArchive() {
@@ -82,22 +72,21 @@ public class CalculatorTest extends Arquillian {
     }
     
     @BeforeMethod(dependsOnGroups = {"arquillian"})
-    public void preparePage() {
-        page = new CalculatorPage();
-        driver.get(page.getAddress());
-        PageFactory.initElements(new DefaultElementLocatorFactory(driver), page);
+    public void preparePage() throws MalformedURLException {
+        page = createPage(new URL("http://10.0.2.2:8080/richrates/"));
+        driver.get(getPage().getUrl().toString());
+        FieldDecorator decoraor = new StaleReferenceAwareFieldDecorator(new DefaultElementLocatorFactory(driver), 5);
+        PageFactory.initElements(decoraor, page);
     }
     
-    @Test
-    public void testCalculate() {
-        
-        page.setAmount(33);
-        page.waitUntilResultOutputIsNotEmpty(new WebDriverWait(driver, 5000));
-        
-        String result = page.getResult();
-
-        Assert.assertTrue(result.matches("33.000 EUR = \\d+\\.\\d{3} USD"),
-            "Result should start match expression \"33.000 EUR = \\d+\\.\\d{3} USD\".");
-        Assert.assertNotEquals(result, "33.000 EUR = 0.000 USD", "Exchange rate for USD should not be 0.");
+    protected P getPage() {
+        return page;
     }
+    
+    protected WebDriver getWebDriver() {
+        return driver;
+    }
+    
+    protected abstract P createPage(URL host);
+    
 }
