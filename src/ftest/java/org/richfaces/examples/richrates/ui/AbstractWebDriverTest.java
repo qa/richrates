@@ -26,6 +26,7 @@ import java.net.URL;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.drone.api.annotation.Drone;
+import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.arquillian.testng.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.importer.ExplodedImporter;
@@ -34,6 +35,7 @@ import org.jboss.shrinkwrap.resolver.api.DependencyResolvers;
 import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
 import org.jboss.test.selenium.android.support.pagefactory.StaleReferenceAwareFieldDecorator;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.android.AndroidDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.FieldDecorator;
@@ -43,7 +45,8 @@ public abstract class AbstractWebDriverTest<P extends Page> extends Arquillian{
 
     @Drone
     private WebDriver driver;
-    
+    @ArquillianResource
+    private URL deployedRoot;
     private P page;
     
     // TODO include manifest.mf with org.slf4j dependency
@@ -73,7 +76,7 @@ public abstract class AbstractWebDriverTest<P extends Page> extends Arquillian{
     
     @BeforeMethod(dependsOnGroups = {"arquillian"})
     public void preparePage() throws MalformedURLException {
-        page = createPage(new URL("http://10.0.2.2:8080/richrates/"));
+        page = createPage(getRoot());
         driver.get(getPage().getUrl().toString());
         FieldDecorator decoraor = new StaleReferenceAwareFieldDecorator(new DefaultElementLocatorFactory(driver), 5);
         PageFactory.initElements(decoraor, page);
@@ -86,7 +89,15 @@ public abstract class AbstractWebDriverTest<P extends Page> extends Arquillian{
     protected WebDriver getWebDriver() {
         return driver;
     }
+
+    private URL getRoot() throws MalformedURLException {
+        if (driver instanceof AndroidDriver) {
+            return new URL(deployedRoot.toString().replace(deployedRoot.getHost(), "10.0.2.2"));
+        } else {
+            return deployedRoot;
+        }
+    }
     
-    protected abstract P createPage(URL host);
+    protected abstract P createPage(URL root);
     
 }
