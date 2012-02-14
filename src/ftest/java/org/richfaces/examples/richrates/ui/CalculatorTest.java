@@ -35,9 +35,13 @@ import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
+import org.openqa.selenium.support.pagefactory.FieldDecorator;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
@@ -48,9 +52,8 @@ public class CalculatorTest extends Arquillian {
 
     @Drone
     private WebDriver driver;
-    @ArquillianResource
-    private URL deploymentURL;
-
+    private CalculatorPage page;
+    
     public static final String WEBAPP_SRC = "src/main/webapp";
 
     // TODO include manifest.mf with org.slf4j dependency
@@ -77,45 +80,21 @@ public class CalculatorTest extends Arquillian {
 
         return war;
     }
-
-    public ExpectedCondition<WebElement> visibilityOfElementLocated(final By locator) {
-        return new ExpectedCondition<WebElement>() {
-            public WebElement apply(WebDriver driver) {
-                WebElement toReturn = driver.findElement(locator);
-                if (toReturn.isDisplayed()) {
-                    return toReturn;
-                }
-                return null;
-            }
-        };
+    
+    @BeforeMethod(dependsOnGroups = {"arquillian"})
+    public void preparePage() {
+        page = new CalculatorPage();
+        driver.get(page.getAddress());
+        PageFactory.initElements(new DefaultElementLocatorFactory(driver), page);
     }
-
-    public ExpectedCondition<WebElement> notEmptyText(final By locator) {
-        return new ExpectedCondition<WebElement>() {
-            public WebElement apply(WebDriver driver) {
-                WebElement toReturn = driver.findElement(locator);
-                if (!toReturn.getText().equals("")) {
-                    return toReturn;
-                }
-                return null;
-            }
-        };
-    }
-
+    
     @Test
     public void testCalculate() {
-        driver.get(deploymentURL.toString());
-
-        WebDriverWait wait = new WebDriverWait(driver, 5000);
-
-        WebElement amountInput = driver.findElement(By.id("calculator:amount")); 
-        amountInput.clear();
-        amountInput.sendKeys("33");
-        amountInput.submit();
         
-        wait.until(notEmptyText(By.cssSelector("div.result")));
-
-        String result = driver.findElement(By.cssSelector("div.result")).getText();
+        page.setAmount(33);
+        page.waitUntilResultOutputIsNotEmpty(new WebDriverWait(driver, 5000));
+        
+        String result = page.getResult();
 
         Assert.assertTrue(result.matches("33.000 EUR = \\d+\\.\\d{3} USD"),
             "Result should start match expression \"33.000 EUR = \\d+\\.\\d{3} USD\".");
