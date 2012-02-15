@@ -20,6 +20,7 @@
         <configuration>
             <property name="serverConfig">standalone-preview.xml</property>
             <property name="outputToConsole">false</property>
+            <property name="javaVmArguments">-Djboss.bind.address=0.0.0.0</property>
         </configuration>
     </container>
 
@@ -29,6 +30,7 @@
     <container qualifier="jbossas-managed-71">
         <configuration>
             <property name="serverConfig">standalone-full.xml</property>
+            <property name="javaVmArguments">-Djboss.bind.address=0.0.0.0</property>
         </configuration>
     </container>
 
