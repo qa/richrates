@@ -21,9 +21,13 @@
  *******************************************************************************/
 package org.richfaces.examples.richrates.ui;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.test.api.ArquillianResource;
@@ -35,11 +39,16 @@ import org.jboss.shrinkwrap.resolver.api.DependencyResolvers;
 import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
 import org.jboss.test.selenium.android.support.pagefactory.StaleReferenceAwareFieldDecorator;
 import org.jboss.test.selenium.listener.ConsoleStatusTestListener;
+import org.jboss.test.selenium.utils.testng.TestInfo;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.android.AndroidDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.FieldDecorator;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 
@@ -47,10 +56,13 @@ import org.testng.annotations.Listeners;
 public abstract class AbstractWebDriverTest<P extends Page> extends Arquillian {
 
     @Drone
-    private WebDriver driver;
+    public WebDriver driver;
     @ArquillianResource
     private URL deployedRoot;
     private P page;
+    protected File mavenProjectBuildDirectory = new File(System.getProperty("maven.project.build.directory",
+        "./target/"));
+    protected File failuresOutputDir = new File(mavenProjectBuildDirectory, "failures");
 
     // TODO include manifest.mf with org.slf4j dependency
     @Deployment(testable = false)
@@ -80,6 +92,7 @@ public abstract class AbstractWebDriverTest<P extends Page> extends Arquillian {
 
     @BeforeMethod(dependsOnGroups = { "arquillian" })
     public void preparePage() throws MalformedURLException {
+
         page = createPage(getRoot());
         if (driver instanceof AndroidDriver) {
             driver.get(getPage().getUrl().toString().replace("faces", "faces/mobile"));
@@ -110,5 +123,49 @@ public abstract class AbstractWebDriverTest<P extends Page> extends Arquillian {
     }
 
     protected abstract P createPage(URL root);
+
+    @AfterMethod(alwaysRun = true, groups = "arquillian")
+    public void handleTestError(ITestResult result) {
+        if (driver == null) {
+            return;
+        }
+
+        if (result.getStatus() == ITestResult.SUCCESS) {
+            return;
+        }
+
+        Throwable throwable = result.getThrowable();
+        String stacktrace = null;
+
+        if (throwable != null) {
+            stacktrace = ExceptionUtils.getStackTrace(throwable);
+        }
+
+        String filenameIdentification = getFilenameIdentification(result);
+
+        String htmlSource = driver.getPageSource();
+
+        File stacktraceOutputFile = new File(failuresOutputDir, filenameIdentification + "/stacktrace.txt");
+        File imageOutputFile = new File(failuresOutputDir, filenameIdentification + "/screenshot.png");
+        File htmlSourceOutputFile = new File(failuresOutputDir, filenameIdentification + "/html-source.html");
+
+        try {
+            File directory = imageOutputFile.getParentFile();
+            FileUtils.forceMkdir(directory);
+
+            FileUtils.writeStringToFile(stacktraceOutputFile, stacktrace);
+            FileUtils.writeStringToFile(htmlSourceOutputFile, htmlSource);
+
+            File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            FileUtils.copyFile(scrFile, imageOutputFile);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private String getFilenameIdentification(ITestResult result) {
+        return TestInfo.getClassMethodName(result);
+    }
 
 }
