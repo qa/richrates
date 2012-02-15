@@ -88,7 +88,7 @@
         <version.arquillian-drone>1.0.0.CR3</version.arquillian-drone>
         <version.jbossas-70>7.0.2.Final</version.jbossas-70>
         <version.jbossas-71>7.1.0.CR1b</version.jbossas-71>
-        <version.selenium>2.16.0</version.selenium>
+        <version.selenium>2.19.0</version.selenium>
 
         <home.jbossas-70>${project.build.directory}/jboss-as-${version.jbossas-70}</home.jbossas-70>
         <home.jbossas-71>${project.build.directory}/jboss-as-${version.jbossas-71}</home.jbossas-71>
@@ -110,13 +110,6 @@
                 <groupId>org.jboss.arquillian</groupId>
                 <artifactId>arquillian-bom</artifactId>
                 <version>${version.arquillian-core}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.arquillian.extension</groupId>
-                <artifactId>arquillian-drone-bom</artifactId>
-                <version>${version.arquillian-drone}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -195,6 +188,7 @@
         <dependency>
             <groupId>org.jboss.arquillian.extension</groupId>
             <artifactId>arquillian-drone-impl</artifactId>
+            <version>${version.arquillian-drone}</version>
             <scope>test</scope>
         </dependency>
         <!-- Resolution of JAR libraries into WAR archive -->
@@ -207,6 +201,7 @@
         <dependency>
             <groupId>org.jboss.arquillian.extension</groupId>
             <artifactId>arquillian-drone-webdriver</artifactId>
+            <version>${version.arquillian-drone}</version>
             <scope>test</scope>
         </dependency>
         <!-- Selenium -->
@@ -223,12 +218,6 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-support</artifactId>
-            <version>${version.selenium}</version>
-        </dependency>
-            <!-- Drivers -->
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-android-driver</artifactId>
             <version>${version.selenium}</version>
         </dependency>
     </dependencies>
