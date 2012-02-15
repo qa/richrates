@@ -41,14 +41,14 @@ import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.FieldDecorator;
 import org.testng.annotations.BeforeMethod;
 
-public abstract class AbstractWebDriverTest<P extends Page> extends Arquillian{
+public abstract class AbstractWebDriverTest<P extends Page> extends Arquillian {
 
     @Drone
     private WebDriver driver;
     @ArquillianResource
     private URL deployedRoot;
     private P page;
-    
+
     // TODO include manifest.mf with org.slf4j dependency
     @Deployment(testable = false)
     public static WebArchive createTestArchive() {
@@ -63,8 +63,9 @@ public abstract class AbstractWebDriverTest<P extends Page> extends Arquillian{
 
         war.merge(ShrinkWrap.create(ExplodedImporter.class, "tmp1.war").importDirectory("src/main/webapp")
             .as(WebArchive.class));
-        war.merge(ShrinkWrap.create(ExplodedImporter.class, "tmp2.war").importDirectory("src/main/resources")
-            .as(WebArchive.class), "WEB-INF/classes");
+        war.merge(
+            ShrinkWrap.create(ExplodedImporter.class, "tmp2.war").importDirectory("src/main/resources")
+                .as(WebArchive.class), "WEB-INF/classes");
 
         war.addAsLibraries(resolver.artifact("org.richfaces.ui:richfaces-components-ui").resolveAsFiles());
         war.addAsLibraries(resolver.artifact("org.richfaces.core:richfaces-core-impl").resolveAsFiles());
@@ -73,31 +74,34 @@ public abstract class AbstractWebDriverTest<P extends Page> extends Arquillian{
 
         return war;
     }
-    
-    @BeforeMethod(dependsOnGroups = {"arquillian"})
+
+    @BeforeMethod(dependsOnGroups = { "arquillian" })
     public void preparePage() throws MalformedURLException {
         page = createPage(getRoot());
         driver.get(getPage().getUrl().toString());
         FieldDecorator decoraor = new StaleReferenceAwareFieldDecorator(new DefaultElementLocatorFactory(driver), 5);
         PageFactory.initElements(decoraor, page);
     }
-    
+
     protected P getPage() {
         return page;
     }
-    
+
     protected WebDriver getWebDriver() {
         return driver;
     }
 
     private URL getRoot() throws MalformedURLException {
-        if (driver instanceof AndroidDriver) {
+        if (System.getProperty("server.address") != null) {
+            return new URL(deployedRoot.toString()
+                .replace(deployedRoot.getHost(), System.getProperty("server.address")));
+        } else if (driver instanceof AndroidDriver) {
             return new URL(deployedRoot.toString().replace(deployedRoot.getHost(), "10.0.2.2"));
         } else {
             return deployedRoot;
         }
     }
-    
+
     protected abstract P createPage(URL root);
-    
+
 }
