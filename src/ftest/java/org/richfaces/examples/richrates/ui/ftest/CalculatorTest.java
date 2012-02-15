@@ -23,7 +23,6 @@ package org.richfaces.examples.richrates.ui.ftest;
 
 import java.net.URL;
 
-import org.jboss.arquillian.testng.Arquillian;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.richfaces.examples.richrates.ui.AbstractWebDriverTest;
 import org.testng.Assert;

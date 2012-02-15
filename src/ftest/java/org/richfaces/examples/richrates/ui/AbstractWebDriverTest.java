@@ -78,7 +78,11 @@ public abstract class AbstractWebDriverTest<P extends Page> extends Arquillian {
     @BeforeMethod(dependsOnGroups = { "arquillian" })
     public void preparePage() throws MalformedURLException {
         page = createPage(getRoot());
-        driver.get(getPage().getUrl().toString());
+        if (driver instanceof AndroidDriver) {
+            driver.get(getPage().getUrl().toString().replace("faces", "faces/mobile"));
+        } else {
+            driver.get(getPage().getUrl().toString());
+        }
         FieldDecorator decoraor = new StaleReferenceAwareFieldDecorator(new DefaultElementLocatorFactory(driver), 5);
         PageFactory.initElements(decoraor, page);
     }
