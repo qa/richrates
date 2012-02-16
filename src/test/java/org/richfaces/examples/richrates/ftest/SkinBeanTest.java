@@ -19,7 +19,7 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  *******************************************************************************/
-package org.richfaces.examples.richrates;
+package org.richfaces.examples.richrates.ftest;
 
 import javax.inject.Inject;
 
@@ -29,6 +29,7 @@ import org.jboss.shrinkwrap.api.ArchivePaths;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.ByteArrayAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.richfaces.examples.richrates.SkinBean;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
