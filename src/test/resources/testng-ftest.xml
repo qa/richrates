@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Functional tests">
+
+    <test name="Functional tests">
+        <packages>
+            <package name="org.richfaces.examples.richrates.ftest.*" />
+        </packages>
+    </test>
+
+    <test name="Webdriver tests">
+        <packages>
+            <package name="org.richfaces.examples.richrates.ui.ftest.*" />
+        </packages>
+    </test>
+</suite>

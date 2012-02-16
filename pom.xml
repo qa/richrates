@@ -93,8 +93,7 @@
         <home.jbossas-70>${project.build.directory}/jboss-as-${version.jbossas-70}</home.jbossas-70>
         <home.jbossas-71>${project.build.directory}/jboss-as-${version.jbossas-71}</home.jbossas-71>
 
-        <ftestSourceDirectory>src/ftest</ftestSourceDirectory>
-        <ftestOutputDirectory>target/ftest-classes</ftestOutputDirectory>
+        <testng.suite.xml>src/test/resources/testng.xml</testng.suite.xml>
     </properties>
 
     <dependencyManagement>
@@ -291,127 +290,32 @@
                     </items>
                 </configuration>
             </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFiles>${testng.suite.xml}</suiteXmlFiles>
+                    </suiteXmlFiles>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
     <profiles>
         <profile>
             <id>ftest</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <configuration>
-                            <test>**/*.java</test>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>create-directory</id>
-                                <phase>pre-integration-test</phase>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                                <configuration>
-                                    <tasks>
-                                        <echo message="Creating Directory ${ftestOutputDirectory}" />
-                                        <mkdir dir="${ftestOutputDirectory}" />
-                                    </tasks>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>build-helper-maven-plugin</artifactId>
-                        <version>1.5</version>
-                        <executions>
-                            <execution>
-                                <id>add-test-sources</id>
-                                <phase>pre-integration-test</phase>
-                                <goals>
-                                    <goal>add-test-source</goal>
-                                </goals>
-                                <configuration>
-                                    <sources>
-                                        <source>${ftestSourceDirectory}/java</source>
-                                    </sources>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>add-test-resources</id>
-                                <phase>pre-integration-test</phase>
-                                <goals>
-                                    <goal>add-test-resource</goal>
-                                </goals>
-                                <configuration>
-                                    <resources>
-                                        <resource>
-                                            <directory>${ftestSourceDirectory}/java</directory>
-                                            <targetPath>${ftestOutputDirectory}</targetPath>
-                                        </resource>
-                                    </resources>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>add-empty-directory</id>
-                                <phase>pre-integration-test</phase>
-                                <goals>
-                                    <goal>add-test-resource</goal>
-                                </goals>
-                                <configuration>
-                                    <resources>
-                                        <resource>
-                                            <directory>${ftestSourceDirectory}/java</directory>
-                                            <targetPath>${ftestOutputDirectory}</targetPath>
-                                            <excludes>
-                                                <exclude>**/*</exclude>
-                                            </excludes>
-                                        </resource>
-                                    </resources>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <artifactId>maven-compiler-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <phase>pre-integration-test</phase>
-                                <goals>
-                                    <goal>testCompile</goal>
-                                </goals>
-                                <configuration>
-                                    <compilerArguments>
-                                        <d>${ftestOutputDirectory}</d>
-                                    </compilerArguments>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <artifactId>maven-failsafe-plugin</artifactId>
-                        <configuration>
-                            <testClassesDirectory>${ftestOutputDirectory}</testClassesDirectory>
-                            <test>**/*.java</test>
-                            <additionalClasspathElements>
-                                <additionalClasspathElement>${ftestSourceDirectory}/resources</additionalClasspathElement>
-                            </additionalClasspathElements>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>integration-test</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
+            <properties>
+                <testng.suite.xml>src/test/resources/testng-ftest.xml</testng.suite.xml>
+            </properties>
         </profile>
+        
+        <profile>
+            <id>all-tests</id>
+            <properties>
+                <testng.suite.xml>src/test/resources/testng-all.xml</testng.suite.xml>
+            </properties>
+        </profile>
+        
         <profile>
             <id>jbossas-remote-71</id>
             <dependencies>
