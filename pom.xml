@@ -60,7 +60,12 @@
     <developers>
         <developer>
             <name>Pavol Pitonak</name>
-            <email>ppitonak@redhat.com</email>
+            <email>ppitonak @ redhat.com</email>
+            <timezone>+1</timezone>
+        </developer>
+        <developer>
+            <name>Jan Papousek</name>
+            <email>jpapouse @ redhat.com</email>
             <timezone>+1</timezone>
         </developer>
     </developers>
