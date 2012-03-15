@@ -110,12 +110,81 @@
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
+
             <dependency>
                 <groupId>org.jboss.arquillian</groupId>
                 <artifactId>arquillian-bom</artifactId>
                 <version>${version.arquillian-core}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.arquillian.extension</groupId>
+                <artifactId>arquillian-drone-bom</artifactId>
+                <version>${version.arquillian-drone}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            
+            <!-- Selenium Server -->
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-server</artifactId>
+                <version>${version.selenium}</version>
+            </dependency> 
+
+            <!-- Selenium dependecies -->
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-api</artifactId>
+                <version>${version.selenium}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-java</artifactId>
+                <version>${version.selenium}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-support</artifactId>
+                <version>${version.selenium}</version>
+            </dependency>
+
+            <!-- Drivers -->
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-android-driver</artifactId>
+                <version>${version.selenium}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-chrome-driver</artifactId>
+                <version>${version.selenium}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-firefox-driver</artifactId>
+                <version>${version.selenium}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-htmlunit-driver</artifactId>
+                <version>${version.selenium}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-ie-driver</artifactId>
+                <version>${version.selenium}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-iphone-driver</artifactId>
+                <version>${version.selenium}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-remote-driver</artifactId>
+                <version>${version.selenium}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -192,7 +261,6 @@
         <dependency>
             <groupId>org.jboss.arquillian.extension</groupId>
             <artifactId>arquillian-drone-impl</artifactId>
-            <version>${version.arquillian-drone}</version>
             <scope>test</scope>
         </dependency>
         <!-- Resolution of JAR libraries into WAR archive -->
@@ -205,24 +273,20 @@
         <dependency>
             <groupId>org.jboss.arquillian.extension</groupId>
             <artifactId>arquillian-drone-webdriver</artifactId>
-            <version>${version.arquillian-drone}</version>
             <scope>test</scope>
         </dependency>
         <!-- Selenium -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-api</artifactId>
-            <version>${version.selenium}</version>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>${version.selenium}</version>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-support</artifactId>
-            <version>${version.selenium}</version>
         </dependency>
     </dependencies>
 
@@ -287,14 +351,14 @@
                 <testng.suite.xml>src/test/resources/testng-ftest.xml</testng.suite.xml>
             </properties>
         </profile>
-        
+
         <profile>
             <id>all-tests</id>
             <properties>
                 <testng.suite.xml>src/test/resources/testng-all.xml</testng.suite.xml>
             </properties>
         </profile>
-        
+
         <profile>
             <id>jbossas-remote-71</id>
             <dependencies>
