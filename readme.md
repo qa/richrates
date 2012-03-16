@@ -38,16 +38,16 @@ To execute unit tests, run
 
 To execute only Arquillian functional tests, run 
 
-   mvn clean verify -P jbossas-managed-71,ftest
+    mvn clean verify -P jbossas-managed-71,ftest
 
 To execute both unit tests and functional tests, run
 
-   mvn clean verify -P jbossas-managed-71,all-tests
+    mvn clean verify -P jbossas-managed-71,all-tests
 
 All functional tests run in real Java EE container so the commands above will download JBoss AS 7.1.1.Final from a Maven repository, start the container, deploy the application, start Firefox, and execute the tests.
 
 ## Credits
 
-The application uses data provided by European Central Bank (http://www.ecb.europa.eu).
-The images of flags provided by RedpixArt Design (http://flags.redpixart.com).
+The application uses data provided by [European Central Bank](http://www.ecb.europa.eu).
+The images of flags provided by [RedpixArt Design](http://flags.redpixart.com).
 
