@@ -90,7 +90,7 @@
 
 		<version.richfaces>4.2.1-SNAPSHOT</version.richfaces>
 		<version.arquillian-core>1.0.0.CR7</version.arquillian-core>
-		<version.arquillian-drone>1.0.0.CR3</version.arquillian-drone>
+		<version.arquillian-drone>1.0.0.CR4</version.arquillian-drone>
 		<version.jbossas-70>7.0.2.Final</version.jbossas-70>
 		<version.jbossas-71>7.1.1.Final</version.jbossas-71>
 		<version.selenium>2.20.0</version.selenium>
