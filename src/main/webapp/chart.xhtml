@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:rich="http://richfaces.org/rich" xmlns:a4j="http://richfaces.org/a4j">
+<html xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:rich="http://richfaces.org/rich"
+    xmlns:a4j="http://richfaces.org/a4j" xmlns:f="http://java.sun.com/jsf/core">
 
 <!--
     JBoss, Home of Professional Open Source
@@ -44,7 +44,9 @@
             <h:outputScript library="scripts/flot" name="jquery.flot.symbol.min.js" />
             <h:outputScript library="scripts/flot" name="jquery.flot.threshold.min.js" />
             <h:outputScript library="scripts/flot" name="jquery.colorhelpers.min.js" />
-            <h:outputText value="&lt;!--[if lte IE 8]&gt;&lt;script type=&quot;text/javascript&quot; src=&quot;#{request.contextPath}/resources/scripts/flot/excanvas.min.js&quot; /&gt;&lt;![endif]--&gt;" escape="false" />
+            <h:outputText
+                value="&lt;!--[if lte IE 8]&gt;&lt;script type=&quot;text/javascript&quot; src=&quot;#{request.contextPath}/resources/scripts/flot/excanvas.min.js&quot; /&gt;&lt;![endif]--&gt;"
+                escape="false" />
             <h:outputStylesheet library="styles" name="chart.css" />
         </ui:define>
 
@@ -60,16 +62,20 @@
                             <h:outputLabel value="From date" for="fromDate" style="white-space: nowrap;" />
                             <rich:calendar id="fromDate" value="#{chartBean.fromDate}" required="true" styleClass="calendar"
                                 boundaryDatesMode="select" dayDisableFunction="disablementFunction" defaultLabel="Select a date"
-                                dayClassFunction="disabledClassesProv" validator="#{ratesBean.validateDate}"
-                                style="white-space: nowrap;" timeZone="#{ratesBean.timeZone}" />
+                                dayClassFunction="disabledClassesProv" style="white-space: nowrap;"
+                                timeZone="#{ratesBean.timeZone}">
+                                <f:validator validatorId="dateValidator" />
+                            </rich:calendar>
 
                             <rich:message id="fromDateMsg" for="fromDate" showDetail="false" showSummary="false" />
 
                             <h:outputLabel value="To date" for="toDate" style="white-space: nowrap;" />
                             <rich:calendar id="toDate" value="#{chartBean.toDate}" required="true" styleClass="calendar"
                                 boundaryDatesMode="select" dayDisableFunction="disablementFunction" defaultLabel="Select a date"
-                                dayClassFunction="disabledClassesProv" validator="#{ratesBean.validateDate}"
-                                style="white-space: nowrap;" timeZone="#{ratesBean.timeZone}" />
+                                dayClassFunction="disabledClassesProv" style="white-space: nowrap;"
+                                timeZone="#{ratesBean.timeZone}">
+                                <f:validator validatorId="dateValidator" />
+                            </rich:calendar>
 
                             <rich:message id="toDateMsg" for="toDate" showDetail="false" showSummary="false" />
 

@@ -37,10 +37,6 @@ import java.util.TimeZone;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
-import javax.faces.application.FacesMessage;
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
-import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
 
 import org.jdom.Document;
@@ -48,7 +44,6 @@ import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.Namespace;
 import org.jdom.input.SAXBuilder;
-import org.joda.time.DateTime;
 import org.richfaces.examples.richrates.annotation.CurrenciesNames;
 import org.richfaces.examples.richrates.annotation.ExchangeRates;
 import org.richfaces.examples.richrates.annotation.IssueDate;
@@ -239,50 +234,4 @@ public class RatesBean implements Serializable {
         return new ArrayList<String>(currencyNames.keySet());
     }
 
-    /**
-     * A validator for dates. It checks that tha date is not in future and that is is in the period of last 90 days.
-     * 
-     * @param context
-     *            a Faces context
-     * @param component
-     *            a calendar that is being checked
-     * @param value
-     *            value of the calendar
-     * @throws ValidatorException
-     *             if the date is sooner than 90 days ago, is in future, or there are no exchange rates for the selected
-     *             date
-     */
-    public void validateDate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
-        if (value == null) {
-            return;
-        }
-
-        DateTime fromDate = new DateTime(issueDate).minusDays(89);
-        DateTime toDate = new DateTime(issueDate);
-        DateTime selectedDate = new DateTime(value);
-
-        // check that the selected date is not in future
-        if (selectedDate.compareTo(toDate) > 0) {
-            FacesMessage message = new FacesMessage(
-                "Date: There are only exchange rates for last 90 days available (excluding weekends and holidays). Select sooner date.");
-            message.setSeverity(FacesMessage.SEVERITY_ERROR);
-            throw new ValidatorException(message);
-        }
-
-        // check that the selected date is not sooner than oldest exchange rates list
-        if (selectedDate.compareTo(fromDate) < 0) {
-            FacesMessage message = new FacesMessage(
-                "Date: There are only exchange rates for last 90 days available (excluding weekends and holidays). Select later date.");
-            message.setSeverity(FacesMessage.SEVERITY_ERROR);
-            throw new ValidatorException(message);
-        }
-
-        // handle special cases --
-        if (!currencies.keySet().contains(selectedDate.toDate())) {
-            FacesMessage message = new FacesMessage(
-                "Date: There are no exchange rates for selected day available. Select later date.");
-            message.setSeverity(FacesMessage.SEVERITY_ERROR);
-            throw new ValidatorException(message);
-        }
-    }
 }

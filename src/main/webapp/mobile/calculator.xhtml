@@ -68,8 +68,10 @@
                             <h:outputLabel value="Date:" for="date" />
                             <rich:calendar id="date" value="#{calculatorBean.selectedDate}" required="true"
                                 styleClass="calendar" boundaryDatesMode="select" dayDisableFunction="disablementFunction"
-                                dayClassFunction="disabledClassesProv" validator="#{ratesBean.validateDate}"
-                                defaultLabel="Select a date" timeZone="#{ratesBean.timeZone}" />
+                                dayClassFunction="disabledClassesProv" defaultLabel="Select a date"
+                                timeZone="#{ratesBean.timeZone}">
+                                <f:validator validatorId="dateValidator" />
+                            </rich:calendar>
                             <rich:message id="dateMsg" for="date" showDetail="false" showSummary="false"
                                 style="width: 16px; height: 16px;" />
 

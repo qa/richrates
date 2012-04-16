@@ -43,25 +43,28 @@
                             <h:outputLabel value="From date" for="fromDate" style="white-space: nowrap;" />
                             <rich:calendar id="fromDate" value="#{chartBean.fromDate}" required="true" styleClass="calendar"
                                 boundaryDatesMode="select" dayDisableFunction="disablementFunction" defaultLabel="Select a date"
-                                dayClassFunction="disabledClassesProv" validator="#{ratesBean.validateDate}"
-                                style="white-space: nowrap;" timeZone="#{ratesBean.timeZone}" />
+                                dayClassFunction="disabledClassesProv" style="white-space: nowrap;"
+                                timeZone="#{ratesBean.timeZone}">
+                                <f:validator validatorId="dateValidator" />
+                            </rich:calendar>
 
                             <rich:message id="fromDateMsg" for="fromDate" showDetail="false" showSummary="false" />
 
                             <h:outputLabel value="To date" for="toDate" style="white-space: nowrap;" />
                             <rich:calendar id="toDate" value="#{chartBean.toDate}" required="true" styleClass="calendar"
                                 boundaryDatesMode="select" dayDisableFunction="disablementFunction" defaultLabel="Select a date"
-                                dayClassFunction="disabledClassesProv" validator="#{ratesBean.validateDate}"
-                                style="white-space: nowrap;" timeZone="#{ratesBean.timeZone}" />
+                                dayClassFunction="disabledClassesProv" style="white-space: nowrap;"
+                                timeZone="#{ratesBean.timeZone}">
+                                <f:validator validatorId="dateValidator" />
+                            </rich:calendar>
 
                             <rich:message id="toDateMsg" for="toDate" showDetail="false" showSummary="false" />
 
                             <a4j:commandButton id="displayButton" value="Display" render="chart" />
                             <h:graphicImage id="flag" library="flags" name="#{chartBean.selectedCurrency}_64.png"
-                                title="#{ratesBean.currenciesNames[chartBean.selectedCurrency]}" 
-                                onmouseover="this.style.cursor='pointer'"
-                                alt="Flag #{chartBean.selectedCurrency}" onclick="showFlags()" 
-                                style="float: right; height: 32px;"/>
+                                title="#{ratesBean.currenciesNames[chartBean.selectedCurrency]}"
+                                onmouseover="this.style.cursor='pointer'" alt="Flag #{chartBean.selectedCurrency}"
+                                onclick="showFlags()" style="float: right; height: 32px;" />
                         </h:panelGrid>
                     </rich:graphValidator>
 

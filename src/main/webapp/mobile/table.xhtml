@@ -18,8 +18,8 @@
                     <h:outputLabel value="Date:" for="date" />
                     <rich:calendar id="date" value="#{tableBean.selectedDate}" required="true" styleClass="calendar"
                         boundaryDatesMode="select" dayDisableFunction="disablementFunction"
-                        dayClassFunction="disabledClassesProv" validator="#{ratesBean.validateDate}"
-                        defaultLabel="Select a date" timeZone="#{ratesBean.timeZone}">
+                        dayClassFunction="disabledClassesProv" defaultLabel="Select a date" timeZone="#{ratesBean.timeZone}">
+                        <f:validator validatorId="dateValidator" />
                         <a4j:ajax render="tableForm" />
                     </rich:calendar>
                 </h:panelGrid>
@@ -30,8 +30,7 @@
                     <f:convertDateTime dateStyle="full" timeStyle="none" timeZone="#{ratesBean.timeZone}" />
                 </h:outputText>
 
-                <rich:dataTable id="table" value="#{ratesBean.codes}" var="code" style="margin-top: 10px;"
-                    rows="12">
+                <rich:dataTable id="table" value="#{ratesBean.codes}" var="code" style="margin-top: 10px;" rows="12">
                     <rich:column id="currency" sortBy="#{code}" sortOrder="ascending">
                         <f:facet name="header">Currency</f:facet>
                         <h:graphicImage id="flag" library="flags" name="#{code}_64.png" alt="#{ratesBean.currenciesNames[code]}"
