@@ -93,7 +93,7 @@
 		<version.arquillian-drone>1.0.0.Final</version.arquillian-drone>
 		<version.jbossas-70>7.0.2.Final</version.jbossas-70>
 		<version.jbossas-71>7.1.1.Final</version.jbossas-71>
-		<version.selenium>2.20.0</version.selenium>
+		<version.selenium>2.21.0</version.selenium>
 
 		<home.jbossas-70>${project.build.directory}/jboss-as-${version.jbossas-70}</home.jbossas-70>
 		<home.jbossas-71>${project.build.directory}/jboss-as-${version.jbossas-71}</home.jbossas-71>
