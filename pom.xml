@@ -21,7 +21,7 @@
     <groupId>org.richfaces.examples</groupId>
     <artifactId>richrates</artifactId>
     <name>RichRates</name>
-    <version>4.2.1-SNAPSHOT</version>
+    <version>4.2.1.Final</version>
     <packaging>war</packaging>
     <description>RichFaces application for exchange rates.</description>
     <url>http://jboss.org/richfaces</url>
@@ -88,7 +88,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <version.richfaces>4.2.1-SNAPSHOT</version.richfaces>
+        <version.richfaces>4.2.1.Final</version.richfaces>
         <version.arquillian-core>1.0.0.Final</version.arquillian-core>
         <version.arquillian-drone>1.0.0.Final</version.arquillian-drone>
         <version.jbossas-70>7.0.2.Final</version.jbossas-70>
