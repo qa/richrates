@@ -314,6 +314,11 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>2.9</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.jboss.as.plugins</groupId>
+                    <artifactId>jboss-as-maven-plugin</artifactId>
+                    <version>${version.jbossas-71}</version>
+            </plugin>
             </plugins>
         </pluginManagement>
 
