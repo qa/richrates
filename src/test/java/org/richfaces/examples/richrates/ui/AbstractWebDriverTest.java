@@ -33,10 +33,8 @@ import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.arquillian.testng.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.importer.ExplodedImporter;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.resolver.api.DependencyResolvers;
-import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
+import org.jboss.shrinkwrap.resolver.api.maven.MavenImporter;
 import org.jboss.test.selenium.listener.ConsoleStatusTestListener;
 import org.jboss.test.selenium.pagefactory.StaleReferenceAwareFieldDecorator;
 import org.jboss.test.selenium.utils.testng.TestInfo;
@@ -67,28 +65,8 @@ public abstract class AbstractWebDriverTest<P extends Page> extends Arquillian {
     // TODO include manifest.mf with org.slf4j dependency
     @Deployment(testable = false)
     public static WebArchive createTestArchive() {
-        MavenDependencyResolver resolver = DependencyResolvers.use(MavenDependencyResolver.class).loadMetadataFromPom(
-            "pom.xml");
-
-        WebArchive war = ShrinkWrap.create(WebArchive.class, "richrates.war");
-
-        war.addPackage("org.richfaces.examples.richrates");
-        war.addPackage("org.richfaces.examples.richrates.annotation");
-        war.addPackages(true, "org.slf4j");
-
-        war.merge(ShrinkWrap.create(ExplodedImporter.class, "tmp1.war").importDirectory("src/main/webapp")
-            .as(WebArchive.class));
-        war.merge(
-            ShrinkWrap.create(ExplodedImporter.class, "tmp2.war").importDirectory("src/main/resources")
-                .as(WebArchive.class), "WEB-INF/classes");
-
-        war.addAsLibraries(resolver.artifact("org.richfaces.ui:richfaces-components-ui").resolveAsFiles());
-        war.addAsLibraries(resolver.artifact("org.richfaces.core:richfaces-core-impl").resolveAsFiles());
-        war.addAsLibraries(resolver.artifact("org.jdom:jdom").resolveAsFiles());
-        war.addAsLibraries(resolver.artifact("joda-time:joda-time").resolveAsFiles());
-        war.addAsLibraries(resolver.artifact("org.jboss.seam.faces:seam-faces").resolveAsFiles());
-        
-        return war;
+        return ShrinkWrap.create(MavenImporter.class, "richrates.war").loadEffectivePom("pom.xml").importBuildOutput()
+            .as(WebArchive.class);
     }
 
     @BeforeMethod(dependsOnGroups = { "arquillian" })

@@ -91,6 +91,7 @@
         <version.richfaces>4.2.1.Final</version.richfaces>
         <version.arquillian-core>1.0.0.Final</version.arquillian-core>
         <version.arquillian-drone>1.0.0.Final</version.arquillian-drone>
+        <version.shrinkwrap.resolver>2.0.0-alpha-1</version.shrinkwrap.resolver>
         <version.jbossas-70>7.0.2.Final</version.jbossas-70>
         <version.jbossas-71>7.1.1.Final</version.jbossas-71>
         <version.selenium>2.21.0</version.selenium>
@@ -113,6 +114,13 @@
             </dependency>
 
             <dependency>
+                <groupId>org.jboss.shrinkwrap.resolver</groupId>
+                <artifactId>shrinkwrap-resolver-bom</artifactId>
+                <version>${version.shrinkwrap.resolver}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
                 <groupId>org.jboss.arquillian</groupId>
                 <artifactId>arquillian-bom</artifactId>
                 <version>${version.arquillian-core}</version>
@@ -127,14 +135,14 @@
                 <scope>import</scope>
             </dependency>
 
-			<!-- Selenium Server -->
+            <!-- Selenium Server -->
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>selenium-server</artifactId>
                 <version>${version.selenium}</version>
             </dependency>
 
-			<!-- Selenium dependecies -->
+            <!-- Selenium dependecies -->
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>selenium-api</artifactId>
@@ -151,7 +159,7 @@
                 <version>${version.selenium}</version>
             </dependency>
 
-			<!-- Drivers -->
+            <!-- Drivers -->
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>selenium-android-driver</artifactId>
@@ -191,7 +199,7 @@
     </dependencyManagement>
 
     <dependencies>
-		<!-- Dependencies for RichFaces -->
+        <!-- Dependencies for RichFaces -->
         <dependency>
             <groupId>org.richfaces.ui</groupId>
             <artifactId>richfaces-components-ui</artifactId>
@@ -201,14 +209,14 @@
             <artifactId>richfaces-core-impl</artifactId>
         </dependency>
 
-		<!-- Dependencies for JavaServer Faces -->
+        <!-- Dependencies for JavaServer Faces -->
         <dependency>
             <groupId>com.sun.faces</groupId>
             <artifactId>jsf-api</artifactId>
             <scope>provided</scope>
         </dependency>
 
-		<!-- Dependencies for CDI -->
+        <!-- Dependencies for CDI -->
         <dependency>
             <groupId>javax.enterprise</groupId>
             <artifactId>cdi-api</artifactId>
@@ -223,14 +231,14 @@
             <version>${version.seam.faces}</version>
         </dependency>
 
-		<!-- Dependencies for Servlet -->
+        <!-- Dependencies for Servlet -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
         
-		<!-- Dependencies for Bean Validation -->
+        <!-- Dependencies for Bean Validation -->
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
@@ -275,7 +283,9 @@
         <!-- Resolution of JAR libraries into WAR archive -->
         <dependency>
             <groupId>org.jboss.shrinkwrap.resolver</groupId>
-            <artifactId>shrinkwrap-resolver-impl-maven</artifactId>
+            <artifactId>shrinkwrap-resolver-depchain</artifactId>
+            <version>${version.shrinkwrap.resolver}</version>
+            <type>pom</type>
             <scope>test</scope>
         </dependency>
 
@@ -356,6 +366,27 @@
                         <suiteXmlFiles>${testng.suite.xml}</suiteXmlFiles>
                     </suiteXmlFiles>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>default-test</id>
+                        <phase>integration-test</phase>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.jboss.shrinkwrap.resolver</groupId>
+                <artifactId>resolver-maven-plugin</artifactId>
+                <version>${version.shrinkwrap.resolver}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>propagate-execution-context</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
