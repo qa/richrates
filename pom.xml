@@ -21,7 +21,7 @@
     <groupId>org.richfaces.examples</groupId>
     <artifactId>richrates</artifactId>
     <name>RichRates</name>
-    <version>4.2.1.Final</version>
+    <version>4.2.2-SNAPSHOT</version>
     <packaging>war</packaging>
     <description>RichFaces application for exchange rates.</description>
     <url>http://jboss.org/richfaces</url>
