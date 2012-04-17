@@ -251,10 +251,10 @@
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
-            <version>2.0</version>
+            <version>2.1</version>
         </dependency>
 
-		<!-- Dependencies for testing -->
+        <!-- Dependencies for testing -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
@@ -271,19 +271,22 @@
             <artifactId>arquillian-drone-impl</artifactId>
             <scope>test</scope>
         </dependency>
-		<!-- Resolution of JAR libraries into WAR archive -->
+
+        <!-- Resolution of JAR libraries into WAR archive -->
         <dependency>
             <groupId>org.jboss.shrinkwrap.resolver</groupId>
             <artifactId>shrinkwrap-resolver-impl-maven</artifactId>
             <scope>test</scope>
         </dependency>
-		<!-- Support for Selenium in Arquillian Drone -->
+
+        <!-- Support for Selenium in Arquillian Drone -->
         <dependency>
             <groupId>org.jboss.arquillian.extension</groupId>
             <artifactId>arquillian-drone-webdriver</artifactId>
             <scope>test</scope>
         </dependency>
-		<!-- Selenium -->
+
+        <!-- Selenium -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-api</artifactId>
