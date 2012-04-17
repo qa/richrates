@@ -86,7 +86,8 @@ public abstract class AbstractWebDriverTest<P extends Page> extends Arquillian {
         war.addAsLibraries(resolver.artifact("org.richfaces.core:richfaces-core-impl").resolveAsFiles());
         war.addAsLibraries(resolver.artifact("org.jdom:jdom").resolveAsFiles());
         war.addAsLibraries(resolver.artifact("joda-time:joda-time").resolveAsFiles());
-
+        war.addAsLibraries(resolver.artifact("org.jboss.seam.faces:seam-faces").resolveAsFiles());
+        
         return war;
     }
 
