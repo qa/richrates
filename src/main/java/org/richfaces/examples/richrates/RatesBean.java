@@ -39,11 +39,11 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 import javax.inject.Named;
 
-import org.jdom.Document;
-import org.jdom.Element;
-import org.jdom.JDOMException;
-import org.jdom.Namespace;
-import org.jdom.input.SAXBuilder;
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.JDOMException;
+import org.jdom2.Namespace;
+import org.jdom2.input.SAXBuilder;
 import org.richfaces.examples.richrates.annotation.CurrenciesNames;
 import org.richfaces.examples.richrates.annotation.ExchangeRates;
 import org.richfaces.examples.richrates.annotation.IssueDate;
@@ -120,7 +120,6 @@ public class RatesBean implements Serializable {
      * Downloads an XML file from European Central Bank containing exchange rates for over 30 currencies for las 90 days
      * and parses it.
      */
-    @SuppressWarnings("unchecked")
     private void getRates() {
         logger.info("Parsing exchange rates");
 
