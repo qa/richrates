@@ -28,6 +28,7 @@ This will create a WAR archive in directory "target". This WAR is deployable to 
 ## Running tests
 
 There are three types of tests featured:
+
 1. TestNG unit tests;
 2. Arquillian functional tests; and
 3. Selenium functional tests.
