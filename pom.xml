@@ -322,20 +322,20 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.9</version>
+                    <version>2.12</version>
                 </plugin>
                 <plugin>
                     <groupId>org.jboss.as.plugins</groupId>
                     <artifactId>jboss-as-maven-plugin</artifactId>
                     <version>${version.jbossas-71}</version>
-            </plugin>
+                </plugin>
             </plugins>
         </pluginManagement>
 
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
+                <version>2.4</version>
                 <configuration>
                     <source>1.6</source>
                     <target>1.6</target>
@@ -344,7 +344,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>2.1.1</version>
+                <version>2.2</version>
                 <configuration>
                     <attachClasses>true</attachClasses>
                     <attachSources>true</attachSources>
