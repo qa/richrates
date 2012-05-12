@@ -95,7 +95,8 @@
         <version.jbossas-70>7.0.2.Final</version.jbossas-70>
         <version.jbossas-71>7.1.1.Final</version.jbossas-71>
         <version.selenium>2.21.0</version.selenium>
-        <version.seam.faces>3.0.0.Final</version.seam.faces>
+        <version.seam.faces>3.1.0.Final</version.seam.faces>
+        <version.seam.international>3.1.0.Final</version.seam.international>
 
         <home.jbossas-70>${project.build.directory}/jboss-as-${version.jbossas-70}</home.jbossas-70>
         <home.jbossas-71>${project.build.directory}/jboss-as-${version.jbossas-71}</home.jbossas-71>
@@ -230,6 +231,11 @@
             <artifactId>seam-faces</artifactId>
             <version>${version.seam.faces}</version>
         </dependency>
+        <dependency>
+            <groupId>org.jboss.seam.international</groupId>
+            <artifactId>seam-international</artifactId>
+            <version>${version.seam.international}</version>
+        </dependency>
 
         <!-- Dependencies for Servlet -->
         <dependency>
@@ -300,14 +306,17 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-api</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-support</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
