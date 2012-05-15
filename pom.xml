@@ -538,6 +538,8 @@
                     <plugin>
                         <artifactId>maven-war-plugin</artifactId>
                         <configuration>
+                            <attachClasses>true</attachClasses>
+                            <attachSources>true</attachSources>
                             <outputDirectory>deployments</outputDirectory>
                             <warName>ROOT</warName>
                         </configuration>
