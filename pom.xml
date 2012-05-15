@@ -88,7 +88,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <version.richfaces>4.2.1.Final</version.richfaces>
+        <version.richfaces>4.2.2.Final</version.richfaces>
         <version.arquillian-core>1.0.0.Final</version.arquillian-core>
         <version.arquillian-drone>1.0.0.Final</version.arquillian-drone>
         <version.shrinkwrap.resolver>2.0.0-alpha-1</version.shrinkwrap.resolver>
