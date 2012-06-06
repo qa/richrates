@@ -115,13 +115,6 @@
             </dependency>
 
             <dependency>
-                <groupId>org.jboss.shrinkwrap.resolver</groupId>
-                <artifactId>shrinkwrap-resolver-bom</artifactId>
-                <version>${version.shrinkwrap.resolver}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
                 <groupId>org.jboss.arquillian</groupId>
                 <artifactId>arquillian-bom</artifactId>
                 <version>${version.arquillian-core}</version>
@@ -285,13 +278,24 @@
             <artifactId>arquillian-drone-impl</artifactId>
             <scope>test</scope>
         </dependency>
-
+        
         <!-- Resolution of JAR libraries into WAR archive -->
         <dependency>
             <groupId>org.jboss.shrinkwrap.resolver</groupId>
-            <artifactId>shrinkwrap-resolver-depchain</artifactId>
+            <artifactId>shrinkwrap-resolver-api</artifactId>
             <version>${version.shrinkwrap.resolver}</version>
-            <type>pom</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.shrinkwrap.resolver</groupId>
+            <artifactId>shrinkwrap-resolver-api-maven</artifactId>
+            <version>${version.shrinkwrap.resolver}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.shrinkwrap.resolver</groupId>
+            <artifactId>shrinkwrap-resolver-impl-maven</artifactId>
+            <version>${version.shrinkwrap.resolver}</version>
             <scope>test</scope>
         </dependency>
 
