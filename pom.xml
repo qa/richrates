@@ -101,7 +101,8 @@
         <version.selenium>2.23.1</version.selenium>
         <version.seam.faces>3.1.0.Final</version.seam.faces>
         <version.seam.international>3.1.0.Final</version.seam.international>
-
+        <version.prettyfaces>3.3.3</version.prettyfaces>
+        
         <home.jbossas-70>${project.build.directory}/jboss-as-${version.jbossas-70}</home.jbossas-70>
         <home.jbossas-71>${project.build.directory}/jboss-as-${version.jbossas-71}</home.jbossas-71>
 
@@ -232,6 +233,13 @@
             <groupId>org.jboss.seam.international</groupId>
             <artifactId>seam-international</artifactId>
             <version>${version.seam.international}</version>
+        </dependency>
+        
+        <!-- Dependencies for PrettyFaces (needed by Seam Faces) -->
+        <dependency>
+            <groupId>com.ocpsoft</groupId>
+            <artifactId>prettyfaces-jsf2</artifactId>
+            <version>${version.prettyfaces}</version>
         </dependency>
 
         <!-- Dependencies for Servlet -->
