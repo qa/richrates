@@ -17,15 +17,37 @@ navigation, View Declaration Language and JSF2's Ajax tag.
 * OpenJDK 6 or Sun JDK 6 or newer
 * JBoss AS 7.0.2 or newer
 
+## Start JBoss AS 7 with the web profile
+
+1. Open a command line and navigate to the root of the JBoss server directory.
+2. The following shows the command line to start the server with the web profile:
+
+    For Linux:   JBOSS_HOME/bin/standalone.sh
+    For Windows: JBOSS_HOME\bin\standalone.bat
+
 ## Build and deploy
 
-To build a project run the following from project root:
+1. Make sure you have started the JBoss Server as described above.
+2. Open a command line and navigate to the root directory of application.
+3. Type this command to build and deploy the archive:
 
-    mvn clean package 
+    mvn clean package jboss-as:deploy
 
-This will create a WAR archive in directory "target". This WAR is deployable to JBoss AS 7.
+4. This will deploy `target/richrates.war` to the running instance of the server.
 
-## Running tests
+## Access the application 
+
+The application will be running at the following URL: [http://localhost:8080/richrates](http://localhost:8080/richrates)>.
+
+## Undeploy the Archive
+
+1. Make sure you have started the JBoss Server as described above.
+2. Open a command line and navigate to the root directory of application.
+3. When you are finished testing, type this command to undeploy the archive:
+
+        mvn jboss-as:undeploy
+
+## Run the tests
 
 There are three types of tests featured:
 

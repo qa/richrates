@@ -428,6 +428,10 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.jboss.as.plugins</groupId>
+                <artifactId>jboss-as-maven-plugin</artifactId>
+            </plugin>
         </plugins>
     </build>
 
