@@ -22,8 +22,8 @@ navigation, View Declaration Language and JSF2's Ajax tag.
 1. Open a command line and navigate to the root of the JBoss server directory.
 2. The following shows the command line to start the server with the web profile:
 
-    For Linux:   JBOSS_HOME/bin/standalone.sh
-    For Windows: JBOSS_HOME\bin\standalone.bat
+       For Linux:   JBOSS_HOME/bin/standalone.sh
+       For Windows: JBOSS_HOME\bin\standalone.bat
 
 ## Build and deploy
 
@@ -31,13 +31,13 @@ navigation, View Declaration Language and JSF2's Ajax tag.
 2. Open a command line and navigate to the root directory of application.
 3. Type this command to build and deploy the archive:
 
-    mvn clean package jboss-as:deploy
+        mvn clean package jboss-as:deploy
 
 4. This will deploy `target/richrates.war` to the running instance of the server.
 
 ## Access the application 
 
-The application will be running at the following URL: [http://localhost:8080/richrates](http://localhost:8080/richrates)>.
+The application will be running at the following URL: [http://localhost:8080/richrates](http://localhost:8080/richrates).
 
 ## Undeploy the Archive
 
