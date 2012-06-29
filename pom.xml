@@ -94,7 +94,7 @@
 
         <version.richfaces>4.2.2.Final</version.richfaces>
         <version.arquillian-core>1.0.1.Final</version.arquillian-core>
-        <version.arquillian-drone>1.0.0.Final</version.arquillian-drone>
+        <version.arquillian-drone>1.1.0.CR1</version.arquillian-drone>
         <version.shrinkwrap.resolver>2.0.0-alpha-1</version.shrinkwrap.resolver>
         <version.jbossas-70>7.0.2.Final</version.jbossas-70>
         <version.jbossas-71>7.1.1.Final</version.jbossas-71>
@@ -102,7 +102,7 @@
         <version.seam.faces>3.1.0.Final</version.seam.faces>
         <version.seam.international>3.1.0.Final</version.seam.international>
         <version.prettyfaces>3.3.3</version.prettyfaces>
-        
+
         <home.jbossas-70>${project.build.directory}/jboss-as-${version.jbossas-70}</home.jbossas-70>
         <home.jbossas-71>${project.build.directory}/jboss-as-${version.jbossas-71}</home.jbossas-71>
 
@@ -333,6 +333,18 @@
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-support</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.opera</groupId>
+            <artifactId>operadriver</artifactId>
+            <scope>test</scope>
+        </dependency>
+        
+        <!-- Dependency for Opera Driver -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>12.0</version>
         </dependency>
     </dependencies>
 
