@@ -39,8 +39,7 @@
     </container>
 
     <extension qualifier="webdriver">
-        <property name="implementationClass">org.openqa.selenium.firefox.FirefoxDriver</property>
-        <!-- <property name="implementationClass">com.opera.core.systems.OperaDriver</property> --> 
+        <property name="browserCapabilities">firefox</property>
         <!-- for Android driver -->
         <property name="remoteAddress">http://localhost:4444/wd/hub</property>
     </extension>
