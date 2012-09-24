@@ -98,7 +98,7 @@
         <version.shrinkwrap.resolver>2.0.0-alpha-1</version.shrinkwrap.resolver>
         <version.jbossas-70>7.0.2.Final</version.jbossas-70>
         <version.jbossas-71>7.1.1.Final</version.jbossas-71>
-        <version.selenium>2.24.1</version.selenium>
+        <version.selenium>2.25.0</version.selenium>
         <version.seam.faces>3.1.0.Final</version.seam.faces>
         <version.seam.international>3.1.0.Final</version.seam.international>
         <version.prettyfaces>3.3.3</version.prettyfaces>
